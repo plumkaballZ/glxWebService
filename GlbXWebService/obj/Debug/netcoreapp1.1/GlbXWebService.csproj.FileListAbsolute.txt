@@ -1,0 +1,10 @@
+C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\bin\Debug\netcoreapp1.1\GlbXWebService.deps.json
+C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\bin\Debug\netcoreapp1.1\GlbXWebService.runtimeconfig.json
+C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\bin\Debug\netcoreapp1.1\GlbXWebService.runtimeconfig.dev.json
+C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\bin\Debug\netcoreapp1.1\GlbXWebService.dll
+C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\bin\Debug\netcoreapp1.1\GlbXWebService.pdb
+C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\obj\Debug\netcoreapp1.1\GlbXWebService.csprojResolveAssemblyReference.cache
+C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\obj\Debug\netcoreapp1.1\GlbXWebService.csproj.CoreCompileInputs.cache
+C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\obj\Debug\netcoreapp1.1\GlbXWebService.AssemblyInfo.cs
+C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\obj\Debug\netcoreapp1.1\GlbXWebService.dll
+C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\obj\Debug\netcoreapp1.1\GlbXWebService.pdb

@@ -8,3 +8,11 @@ C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\obj\Debug\netcoreapp1.
 C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\obj\Debug\netcoreapp1.1\GlbXWebService.AssemblyInfo.cs
 C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\obj\Debug\netcoreapp1.1\GlbXWebService.dll
 C:\Users\Ramic\source\repos\GlbXWebService\GlbXWebService\obj\Debug\netcoreapp1.1\GlbXWebService.pdb
+C:\super_dev_Z\glxWebService\GlbXWebService\bin\Debug\netcoreapp1.1\GlbXWebService.deps.json
+C:\super_dev_Z\glxWebService\GlbXWebService\bin\Debug\netcoreapp1.1\GlbXWebService.runtimeconfig.json
+C:\super_dev_Z\glxWebService\GlbXWebService\bin\Debug\netcoreapp1.1\GlbXWebService.runtimeconfig.dev.json
+C:\super_dev_Z\glxWebService\GlbXWebService\bin\Debug\netcoreapp1.1\GlbXWebService.dll
+C:\super_dev_Z\glxWebService\GlbXWebService\bin\Debug\netcoreapp1.1\GlbXWebService.pdb
+C:\super_dev_Z\glxWebService\GlbXWebService\obj\Debug\netcoreapp1.1\GlbXWebService.AssemblyInfo.cs
+C:\super_dev_Z\glxWebService\GlbXWebService\obj\Debug\netcoreapp1.1\GlbXWebService.dll
+C:\super_dev_Z\glxWebService\GlbXWebService\obj\Debug\netcoreapp1.1\GlbXWebService.pdb

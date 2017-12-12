@@ -43,15 +43,4 @@ namespace GlbXWebService.Controllers
         {
         }
     }
-   
-
-    
-
-
-
-
-
-
-
- 
 }

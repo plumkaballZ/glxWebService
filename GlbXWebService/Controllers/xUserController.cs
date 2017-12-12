@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using GlbXWebService._repo;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,13 @@ namespace GlbXWebService.Controllers
     [Route("api/[controller]")]
     public class xUserController : Controller
     {
+        private _baseRepo _xUserRepo;
+
+        public xUserController()
+        {
+            _xUserRepo = new _baseRepo();
+        }
+
         [HttpGet]
         [EnableCors("AllowAllOrigins")]
         public JsonResult Get()
@@ -22,6 +30,15 @@ namespace GlbXWebService.Controllers
         public JsonResult Post([FromBody]GlxUserRequest req)
         {
             xUser _xUser = new xUser(req.glxUser.email);
+
+            Guid entityUid = _xUserRepo.CreateNewEntity();
+
+            if (entityUid != Guid.Empty)
+            {
+
+            }
+
+
             return Json(_xUser);
         }
     }

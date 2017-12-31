@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using GlbXWebService._repo;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,48 @@ namespace GlbXWebService.Controllers
     [Route("api/[controller]")]
     public class xOrderController : Controller
     {
+        private xOrderRepo _xOrderRepo;
+        private xUserRepo _xUserRepo;
+
+        public xOrderController()
+        {
+            _xOrderRepo = new xOrderRepo();
+            _xUserRepo = new xUserRepo();
+        }
+
         [HttpGet]
         [EnableCors("AllowAllOrigins")]
-        public JsonResult Get()
+        public JsonResult Get(string email)
         {
-            List<xOrder> orders = new List<xOrder>();
-            orders.Add(new xOrder().InitDummy());
-            return Json(orders);
+            //if (_xOrderRepo.Check(email))
+            //    _xOrderRepo.CreateOrder(email);
+
+            return Json(new xOrder().InitDummy());
+        }
+
+        [HttpPost]
+        [EnableCors("AllowAllOrigins")]
+        public JsonResult Post([FromBody]GlxUserRequest req)
+        {
+            _xOrderRepo.CreateOrder(req.glxUser.email);
+            //if (_xOrderRepo.Check(email))
+               
+
+            return Json(new xOrder().InitDummy());
         }
     }
+
     public class xOrder
     {
         public xOrder InitDummy()
         {
             id = 1;
-            number = "1";
-            item_total = "1";
-            total = "1";
-            ship_total = "1";
+            number = "R335381310";
+            item_total = "0.0";
+            total = "0.0";
+            ship_total = "0.0";
+            state = "cart";
+            line_items = new List<xOrderLine>();
 
             return this;
         }
@@ -58,6 +83,18 @@ namespace GlbXWebService.Controllers
         public string canceler_id { get; set; }
         public string total_quantity { get; set; }
         public string token { get; set; }
+
+        public List<xOrderLine> line_items;
+    }
+    public class xOrderLine
+    {
+        public int id;
+        public int quantity;
+        public int price;
+        public int single_display_amount;
+        public int total;
+        public int display_amount;
+        public int variant_id;
     }
 
 }

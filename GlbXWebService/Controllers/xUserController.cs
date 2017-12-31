@@ -11,35 +11,39 @@ namespace GlbXWebService.Controllers
     [Route("api/[controller]")]
     public class xUserController : Controller
     {
-        private _baseRepo _xUserRepo;
+        private xUserRepo _xUserRepo;
 
         public xUserController()
         {
-            _xUserRepo = new _baseRepo();
+            _xUserRepo = new xUserRepo();
         }
 
         [HttpGet]
         [EnableCors("AllowAllOrigins")]
-        public JsonResult Get()
+        public JsonResult Get(string email, string password)
         {
-            List<xUser> xUsers = new List<xUser>();
-            return Json(xUsers);
+            if (_xUserRepo.CheckLogin(email))
+            {
+                var refUid = _xUserRepo.Login(email, password);
+                return refUid == null ? Json(new ReqRes() { error = true, msg ="wrong password" }) : Json(_xUserRepo.GetSignle(refUid));
+            }
+
+            return Json(new ReqRes() { error = true, msg = "cannot find you :(" });
         }
+
         [HttpPost]
         [EnableCors("AllowAllOrigins")]
         public JsonResult Post([FromBody]GlxUserRequest req)
         {
-            xUser _xUser = new xUser(req.glxUser.email);
-
-            Guid entityUid = _xUserRepo.CreateNewEntity();
-
-            if (entityUid != Guid.Empty)
+            if (!_xUserRepo.CheckLogin(req.glxUser.email))
             {
+                var loginUid = _xUserRepo.CreateLogin(req.glxUser);
+                _xUserRepo.Create(loginUid);
 
+                return Json(new xUser(req.glxUser));
             }
 
-
-            return Json(_xUser);
+            return Json(new ReqRes() { error = true, msg = "user already exsists" });
         }
     }
     public class GlxUserRequest
@@ -49,26 +53,34 @@ namespace GlbXWebService.Controllers
 
     public class GlxUser
     {
+        public string mobile { get; set; }
         public string email { get; set; }
         public string password { get; set; }
         public string password_confirmation { get; set; }
     }
     public class xUser
     {
-        public xUser(string email)
+        public xUser(GlxUser glxUser)
         {
-            id = "Erbz";
-            this.email = email;
-            created_at = DateTime.Now.ToString();
-            updated_at = "-";
-            bill_address_id = "1";
-            ship_address_id = "2";
+            email = glxUser.email;
+            mobile = glxUser.mobile;
         }
+        public xUser()
+        {
+
+        }
+
         public string id { get; set; }
         public string email { get; set; }
+        public string mobile { get; set; }
         public string created_at { get; set; }
         public string updated_at { get; set; }
         public string bill_address_id { get; set; }
         public string ship_address_id { get; set; }
+    }
+    class ReqRes
+    {
+        public bool error;
+        public string msg;
     }
 }

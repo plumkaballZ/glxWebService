@@ -21,4 +21,10 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Bifrost">
+      <HintPath>libs\Bifrost\Bifrost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

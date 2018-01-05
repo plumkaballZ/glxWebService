@@ -1,10 +1,6 @@
 ﻿using GlbXWebService._repo;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GlbXWebService.Controllers
 {
@@ -25,7 +21,7 @@ namespace GlbXWebService.Controllers
             if (_xUserRepo.CheckLogin(email))
             {
                 var refUid = _xUserRepo.Login(email, password);
-                return refUid == null ? Json(new ReqRes() { error = true, msg ="wrong password" }) : Json(_xUserRepo.GetSignle(refUid));
+                return refUid == null ? Json(new ReqRes() { error = true, msg = "wrong password" }) : Json(_xUserRepo.GetSignle(refUid));
             }
 
             return Json(new ReqRes() { error = true, msg = "cannot find you :(" });
@@ -37,6 +33,7 @@ namespace GlbXWebService.Controllers
         {
             if (!_xUserRepo.CheckLogin(req.glxUser.email))
             {
+                req.glxUser.ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
                 var loginUid = _xUserRepo.CreateLogin(req.glxUser);
                 _xUserRepo.Create(loginUid);
 
@@ -57,6 +54,7 @@ namespace GlbXWebService.Controllers
         public string email { get; set; }
         public string password { get; set; }
         public string password_confirmation { get; set; }
+        public string ip { get; set; }
     }
     public class xUser
     {
@@ -69,7 +67,7 @@ namespace GlbXWebService.Controllers
         {
 
         }
-
+        public string uid { get; set; }
         public string id { get; set; }
         public string email { get; set; }
         public string mobile { get; set; }
@@ -81,6 +79,7 @@ namespace GlbXWebService.Controllers
     class ReqRes
     {
         public bool error;
+        public bool nope;
         public string msg;
     }
 }

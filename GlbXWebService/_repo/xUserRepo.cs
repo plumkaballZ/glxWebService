@@ -18,18 +18,25 @@ namespace GlbXWebService._repo
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
 
-            paramDic.Add("@_email", xUserLogin.email);
+            Guid loginUid = Guid.NewGuid();
+
+            paramDic.Add("@email", xUserLogin.email);
             paramDic.Add("@pw", xUserLogin.password);
             paramDic.Add("@mobile", xUserLogin.mobile);
+            paramDic.Add("@uid", loginUid.ToString());
+            paramDic.Add("@ip", xUserLogin.ip);
 
+            Conn.ExecuteSP("xUserLogin_Create", paramDic);
 
-            return Conn.GetSingle<string>("xUserLogin_Create", paramDic);
+            return loginUid.ToString();
         }
         public bool Create(string loginUid)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
 
             paramDic.Add("@loginUid", loginUid);
+            paramDic.Add("@userUid", Guid.NewGuid().ToString());
+
             Conn.ExecuteSP("xUser_Create", paramDic);
 
             return true;
@@ -51,8 +58,8 @@ namespace GlbXWebService._repo
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
 
-            paramDic.Add("@_email", email);
-            paramDic.Add("@_pw", pw);
+            paramDic.Add("@email", email);
+            paramDic.Add("@pw", pw);
 
             return Conn.GetSingle<string>("xUserLogin_Login", paramDic);
         }

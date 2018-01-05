@@ -16,25 +16,28 @@ namespace GlbXWebService._repo
         public bool Check(string email)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
-            paramDic.Add("@_email", email);
-
-            var num = Conn.GetSingle<int>("xOrder_Check", paramDic);
-
-            return true;
+            paramDic.Add("@email", email);
+            return Conn.GetSingle<int>("xOrder_Check", paramDic) == 1 ? true : false;
         }
-        public Guid CreateOrder(string email)
+        public Guid CreateOrder(string userUid)
         {
+            Guid orderUid = Guid.NewGuid();
+
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
-            paramDic.Add("@_email", email);
+
+            paramDic.Add("@userUid", userUid);
+            paramDic.Add("@orderUid", orderUid.ToString());
 
             Conn.ExecuteSP("xOrder_Create", paramDic);
 
-            return Guid.Empty;
+            return orderUid;
         }
-        public xOrder GetCurrentOrder()
+        public xOrder GetCurrentOrder(string email)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
-            return Conn.GetSingle<xOrder>("", paramDic);
+            paramDic.Add("@email", email);
+
+            return Conn.GetSingle<xOrder>("xOrder_GetCurrent", paramDic);
         }
         public List<xOrder> GetOrders()
         {

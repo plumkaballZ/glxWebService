@@ -24,19 +24,29 @@ namespace GlbXWebService.Controllers
         [EnableCors("AllowAllOrigins")]
         public JsonResult Get(string email)
         {
-            //if (_xOrderRepo.Check(email))
-            //    _xOrderRepo.CreateOrder(email);
+            if (email != null)
+                return _xOrderRepo.Check(email) ? Json(_xOrderRepo.GetCurrentOrder(email)) : Json(new ReqRes() { nope = true });
 
-            return Json(new xOrder().InitDummy());
+            return Json(new ReqRes() { nope = true });
         }
 
         [HttpPost]
         [EnableCors("AllowAllOrigins")]
         public JsonResult Post([FromBody]GlxUserRequest req)
         {
-            _xOrderRepo.CreateOrder(req.glxUser.email);
-            //if (_xOrderRepo.Check(email))
-               
+            var loingUid = _xUserRepo.Login(req.glxUser.email, req.glxUser.password);
+
+            if (loingUid != null)
+            {
+                var userUid = _xUserRepo.GetSignle(loingUid).uid;
+
+                if (!_xOrderRepo.Check(req.glxUser.email))
+                {
+                    _xOrderRepo.CreateOrder(userUid);
+                    return Json(_xOrderRepo.GetCurrentOrder(req.glxUser.email));
+                }
+
+            }
 
             return Json(new xOrder().InitDummy());
         }

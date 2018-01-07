@@ -26,7 +26,6 @@ namespace GlbXWebService.Controllers
         {
             if (email != null)
                 return _xOrderRepo.Check(email) ? Json(_xOrderRepo.GetCurrentOrder(email)) : Json(new ReqRes() { nope = true });
-
             return Json(new ReqRes() { nope = true });
         }
 
@@ -52,21 +51,36 @@ namespace GlbXWebService.Controllers
         }
     }
 
+
     public class xOrder
     {
         public xOrder InitDummy()
         {
-            id = 1;
+            id = "1";
             number = "R335381310";
             item_total = "0.0";
-            total = "0.0";
+            total = "20.00";
             ship_total = "0.0";
             state = "cart";
+            currency = "eur";
+
+            created_at = DateTime.Now.ToString();
+
             line_items = new List<xOrderLine>();
+
+            line_items.Add(new xOrderLine().initDummy());
 
             return this;
         }
-        public int id { get; set; }
+        public xOrder()
+        {
+            line_items = new List<xOrderLine>();
+
+            line_items.Add(new xOrderLine().initDummy());
+            line_items.Add(new xOrderLine().initDummy());
+            line_items.Add(new xOrderLine().initDummy());
+        }
+        public string id { get; set; }
         public string number { get; set; }
         public string item_total { get; set; }
         public string total { get; set; }
@@ -98,6 +112,20 @@ namespace GlbXWebService.Controllers
     }
     public class xOrderLine
     {
+        public xOrderLine initDummy()
+        {
+            id = 1;
+            quantity = 1;
+            price = 1;
+            single_display_amount = 1;
+            total = 1;
+            display_amount = 1;
+            variant_id = 1;
+
+            image_url = "/assets/api/prods/imgs/prod_10_small.png";
+
+            return this;
+        }
         public int id;
         public int quantity;
         public int price;
@@ -105,6 +133,8 @@ namespace GlbXWebService.Controllers
         public int total;
         public int display_amount;
         public int variant_id;
+
+        public string image_url;
     }
 
 }

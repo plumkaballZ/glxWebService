@@ -14,7 +14,20 @@ namespace GlbXWebService.Controllers
         [EnableCors("AllowAllOrigins")]
         public JsonResult Get(string email)
         {
-            return Json(new xOrder().InitDummy());
+            List<xOrder> orders = new List<xOrder>();
+            orders.Add(new xOrder().InitDummy());
+
+            return Json(orders);
+        }
+
+        [EnableCors("AllowAllOrigins")]
+        [Route("GetOrderDetail")]
+        public JsonResult GetOrderDetail(string email, string orderNumber)
+        {
+            if (email != null)
+                return Json(new xOrder().InitDummy());
+
+            return Json(new ReqRes() { nope = true });
         }
 
         [HttpPost]

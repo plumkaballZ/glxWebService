@@ -25,6 +25,19 @@ namespace GlbXWebService.Controllers
         }
     }
 
+    public class xAddrAttr
+    {
+        public string address1;
+        public string address2;
+        public string city;
+        public int country_id;
+        public string firstname;
+        public string lastname;
+        public string phone;
+        public int state_id;
+        public int zipcode;
+    }
+
     public class xAddr
     {
         public xAddr()
@@ -36,11 +49,14 @@ namespace GlbXWebService.Controllers
         {
             id = "1";
             firstname = "erbz";
-            lastname = "asdf";
+            lastname = "zinrock";
             full_name = "erbz asdf";
 
             address1 = "blommevænget 114";
             address2 = "asdf";
+
+            city = "Odder";
+            zipcode = "8300";
 
             return this;
         }

@@ -49,6 +49,13 @@ namespace GlbXWebService.Controllers
 
             return Json(new xOrder().InitDummy());
         }
+
+        [EnableCors("AllowAllOrigins")]
+        [Route("UpdateOrder")]
+        public JsonResult UpdateOrder([FromBody]GlxUserRequest req)
+        {
+            return Json(new xOrder().InitDummy());
+        }
     }
 
 
@@ -69,16 +76,20 @@ namespace GlbXWebService.Controllers
             line_items = new List<xOrderLine>();
 
             line_items.Add(new xOrderLine().initDummy());
+            total_quantity = line_items.Count();
+
+            bill_address = new xAddr().initDummy();
+            ship_address = new xAddr().initDummy();
 
             return this;
         }
         public xOrder()
         {
             line_items = new List<xOrderLine>();
+            line_items.Add(new xOrderLine().initDummy());
 
-            line_items.Add(new xOrderLine().initDummy());
-            line_items.Add(new xOrderLine().initDummy());
-            line_items.Add(new xOrderLine().initDummy());
+            total_quantity = line_items.Count();
+
         }
         public string id { get; set; }
         public string number { get; set; }
@@ -105,10 +116,14 @@ namespace GlbXWebService.Controllers
         public string currency { get; set; }
         public string considered_risky { get; set; }
         public string canceler_id { get; set; }
-        public string total_quantity { get; set; }
+        public int total_quantity { get; set; }
         public string token { get; set; }
 
         public List<xOrderLine> line_items;
+
+        public xAddr bill_address { get; set; }
+        public xAddr ship_address { get; set; }
+
     }
     public class xOrderLine
     {
@@ -123,6 +138,8 @@ namespace GlbXWebService.Controllers
             variant_id = 1;
 
             image_url = "/assets/api/prods/imgs/prod_10_small.png";
+            variant = new Variant();
+
 
             return this;
         }
@@ -133,8 +150,42 @@ namespace GlbXWebService.Controllers
         public int total;
         public int display_amount;
         public int variant_id;
-
         public string image_url;
+
+        public Variant variant;
+
     }
+
+    public class Variant
+    {
+        public int id;
+        public string name;
+        public string sku;
+        public string price;
+        public string weight;
+        public string height;
+        public string width;
+        public string depth;
+        public bool is_master;
+        public string slug;
+        public string description;
+        public bool track_inventory;
+        public string cost_price;
+        public string option_values;
+        public int total_on_hand;
+        public string display_price;
+        public string options_text;
+        public bool in_stock;
+        public bool is_backorderable;
+        public bool is_destroyed;
+        public string images;
+
+        public Variant()
+        {
+            id = 1;
+            name = "CardHolderX";
+        }
+    }
+
 
 }

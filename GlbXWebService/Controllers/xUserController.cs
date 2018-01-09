@@ -42,6 +42,13 @@ namespace GlbXWebService.Controllers
 
             return Json(new ReqRes() { error = true, msg = "user already exsists" });
         }
+
+        [EnableCors("AllowAllOrigins")]
+        [Route("UpdateUser")]
+        public JsonResult UpdateUser([FromBody]GlxUserRequest req)
+        {
+            return Json(new xOrder().InitDummy());
+        }
     }
     public class GlxUserRequest
     {

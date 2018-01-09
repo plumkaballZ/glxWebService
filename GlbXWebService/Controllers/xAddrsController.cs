@@ -18,9 +18,6 @@ namespace GlbXWebService.Controllers
         {
             List<xAddr> addrs = new List<xAddr>();
             addrs.Add(new xAddr().initDummy());
-            addrs.Add(new xAddr().initDummy());
-            addrs.Add(new xAddr().initDummy());
-            addrs.Add(new xAddr().initDummy());
             return Json(addrs);
         }
     }

@@ -86,8 +86,6 @@ namespace GlbXWebService.Controllers
         public xOrder()
         {
             line_items = new List<xOrderLine>();
-            line_items.Add(new xOrderLine().initDummy());
-
             total_quantity = line_items.Count();
 
         }

@@ -15,8 +15,6 @@ namespace GlbXWebService.Controllers
         public JsonResult Get(string email)
         {
             List<xOrder> orders = new List<xOrder>();
-            orders.Add(new xOrder().InitDummy());
-
             return Json(orders);
         }
 

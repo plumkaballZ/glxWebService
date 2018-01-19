@@ -19,6 +19,13 @@ namespace GlbXWebService._repo
             paramDic.Add("@email", email);
             return Conn.GetSingle<int>("xOrder_Check", paramDic) == 1 ? true : false;
         }
+        public bool CheckNoUser(string ip)
+        {
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@ip", ip);
+            return Conn.GetSingle<int>("xOrder_CheckNoUser", paramDic) == 1 ? true : false;
+        }
+
         public Guid CreateOrder(string userUid)
         {
             Guid orderUid = Guid.NewGuid();
@@ -32,6 +39,27 @@ namespace GlbXWebService._repo
 
             return orderUid;
         }
+        public Guid CreateOrderNoUser(string ip)
+        {
+            Guid orderUid = Guid.NewGuid();
+
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+
+            paramDic.Add("@ip", ip);
+            paramDic.Add("@orderUid", orderUid.ToString());
+
+            Conn.ExecuteSP("xOrder_CreateNoUser", paramDic);
+
+            return orderUid;
+        }
+        internal xOrder GetCurrentOrderNoUser(string ip)
+        {
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@ip", ip);
+
+            return Conn.GetSingle<xOrder>("xOrder_GetCurrentNoUser", paramDic);
+        }
+
         public xOrder GetCurrentOrder(string email)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();

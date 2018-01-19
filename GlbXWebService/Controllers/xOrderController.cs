@@ -24,8 +24,18 @@ namespace GlbXWebService.Controllers
         [EnableCors("AllowAllOrigins")]
         public JsonResult Get(string email)
         {
-            if (email != null)
-                return _xOrderRepo.Check(email) ? Json(_xOrderRepo.GetCurrentOrder(email)) : Json(new ReqRes() { nope = true });
+            if (email == null)
+            {
+                var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+
+                if (_xOrderRepo.CheckNoUser(ip)) return Json(_xOrderRepo.GetCurrentOrderNoUser(ip));
+
+            }
+            else
+            {
+                if (_xOrderRepo.Check(email)) return Json(_xOrderRepo.GetCurrentOrder(email));
+            }
+
             return Json(new ReqRes() { nope = true });
         }
 
@@ -35,16 +45,16 @@ namespace GlbXWebService.Controllers
         {
             var loingUid = _xUserRepo.Login(req.glxUser.email, req.glxUser.password);
 
-            if (loingUid != null)
+            if (loingUid == null)
+            {
+                var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+                if (!_xOrderRepo.CheckNoUser(ip)) _xOrderRepo.CreateOrderNoUser(ip);
+
+            }
+            else
             {
                 var userUid = _xUserRepo.GetSignle(loingUid).uid;
-
-                if (!_xOrderRepo.Check(req.glxUser.email))
-                {
-                    _xOrderRepo.CreateOrder(userUid);
-                    return Json(_xOrderRepo.GetCurrentOrder(req.glxUser.email));
-                }
-
+                if (!_xOrderRepo.Check(req.glxUser.email)) _xOrderRepo.CreateOrder(userUid);
             }
 
             return Json(new xOrder().InitDummy());
@@ -63,23 +73,18 @@ namespace GlbXWebService.Controllers
     {
         public xOrder InitDummy()
         {
-            id = "1";
-            number = "R335381310";
-            item_total = "0.0";
-            total = "20.00";
-            ship_total = "0.0";
-            state = "cart";
-            currency = "eur";
+            //R335381310
+            shipment_state = 1.ToString();
+            payment_state = 1.ToString();
 
             created_at = DateTime.Now.ToString();
 
             line_items = new List<xOrderLine>();
-
-            line_items.Add(new xOrderLine().initDummy());
             total_quantity = line_items.Count();
+            total = "0,00";
 
-            bill_address = new xAddr().initDummy();
-            ship_address = new xAddr().initDummy();
+            //bill_address = new xAddr().initDummy();
+            //ship_address = new xAddr().initDummy();
 
             return this;
         }
@@ -87,7 +92,6 @@ namespace GlbXWebService.Controllers
         {
             line_items = new List<xOrderLine>();
             total_quantity = line_items.Count();
-
         }
         public string id { get; set; }
         public string number { get; set; }
@@ -119,8 +123,8 @@ namespace GlbXWebService.Controllers
 
         public List<xOrderLine> line_items;
 
-        public xAddr bill_address { get; set; }
-        public xAddr ship_address { get; set; }
+        public xAddress bill_address { get; set; }
+        public xAddress ship_address { get; set; }
 
     }
     public class xOrderLine

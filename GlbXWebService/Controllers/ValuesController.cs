@@ -15,7 +15,7 @@ namespace GlbXWebService.Controllers
         [EnableCors("AllowAllOrigins")]
         public string Get()
         {
-            return "glbxW_running";
+            return "service_running";
         }
 
         // GET api/values/5

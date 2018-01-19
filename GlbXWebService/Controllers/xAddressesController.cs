@@ -1,28 +1,25 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using GlbXWebService._repo;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace GlbXWebService.Controllers
 {
     [Route("api/[controller]")]
-    public class xAddrsController : Controller
+    public class xAddressesController : Controller
     {
-        public xAddrsController()
-        {
+        private xAddressRepo _adrRepo = new xAddressRepo();
 
-
-        }
         [HttpGet]
         [EnableCors("AllowAllOrigins")]
         public JsonResult Get(string email)
         {
-            List<xAddr> addrs = new List<xAddr>();
-            addrs.Add(new xAddr().initDummy());
-            return Json(addrs);
+            return Json(_adrRepo.GetAll(email));
         }
     }
 
-    public class xAddrAttr
+    public class xAddressAttr
     {
         public string address1;
         public string address2;
@@ -33,31 +30,45 @@ namespace GlbXWebService.Controllers
         public string phone;
         public int state_id;
         public int zipcode;
+        public string email;
     }
 
-    public class xAddr
+    public class xAddress
     {
-        public xAddr()
+        public xAddress()
         {
 
         }
+        public xAddress(xAddressAttr atr)
+        {
+            address1 = atr.address1;
+            address2 = atr.address2;
+            city = atr.city;
+            zipcode = atr.zipcode.ToString();
+            firstname = atr.firstname;
+            lastname = atr.lastname;
+            phone = atr.phone;
+            full_name = "";
+        }
 
-        public xAddr initDummy()
+        public xAddress initDummy(string firstName)
         {
             id = "1";
-            firstname = "erbz";
+            firstname = firstName;
             lastname = "zinrock";
-            full_name = "erbz asdf";
+            full_name = firstName;
 
             address1 = "blommevænget 114";
             address2 = "asdf";
 
             city = "Odder";
             zipcode = "8300";
+            uid = Guid.NewGuid().ToString();
 
             return this;
         }
 
+        public string uid;
         public string id;
         public string firstname;
         public string lastname;

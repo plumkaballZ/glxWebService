@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace GlbXWebService
 {
@@ -39,6 +42,7 @@ namespace GlbXWebService
             .AddFormatterMappings()
             .AddJsonFormatters();
 
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
@@ -61,6 +65,8 @@ namespace GlbXWebService
             loggerFactory.AddDebug();
 
             app.UseMvc();
+            app.UseStaticFiles();
+
         }
     }
 }

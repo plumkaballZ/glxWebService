@@ -26,7 +26,9 @@ namespace GlbXWebService._repo
             paramDic.Add("@uid", loginUid.ToString());
             paramDic.Add("@ip", xUserLogin.ip);
 
-            Conn.ExecuteSP("xUserLogin_Create", paramDic);
+  
+
+            Conn.ExecuteSP(new ConnParamz("xUserLogin_Create", paramDic));
 
             return loginUid.ToString();
         }
@@ -37,7 +39,9 @@ namespace GlbXWebService._repo
             paramDic.Add("@loginUid", loginUid);
             paramDic.Add("@userUid", Guid.NewGuid().ToString());
 
-            Conn.ExecuteSP("xUser_Create", paramDic);
+        
+
+            Conn.ExecuteSP(new ConnParamz("xUser_Create", paramDic));
 
             return true;
         }
@@ -46,13 +50,18 @@ namespace GlbXWebService._repo
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
             paramDic.Add("@loginUid", refUid);
 
-            return Conn.GetSingle<xUser>("xUser_GetSingle", paramDic);
+        
+
+            return Conn.GetSingle<xUser>(new ConnParamz("xUser_GetSingle", paramDic));
         }
         public bool CheckLogin(string email)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
             paramDic.Add("@email", email);
-            return Conn.GetSingle<int>("xUserLogin_Check", paramDic) == 1 ? true : false;
+
+         
+
+            return Conn.GetSingle<int>(new ConnParamz("xUserLogin_Check", paramDic)) == 1 ? true : false;
         }
         public string Login(string email, string pw)
         {
@@ -61,7 +70,8 @@ namespace GlbXWebService._repo
             paramDic.Add("@email", email);
             paramDic.Add("@pw", pw);
 
-            return Conn.GetSingle<string>("xUserLogin_Login", paramDic);
+         
+            return Conn.GetSingle<string>(new ConnParamz("xUserLogin_Login", paramDic));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using GlbXWebService._repo;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,22 @@ namespace GlbXWebService.Controllers
     [Route("api/[controller]")]
     public class xOrdersController : Controller
     {
+        private xOrderRepo _xOrderRepo;
+
+        public xOrdersController()
+        {
+            _xOrderRepo = new xOrderRepo();
+        }
+
         [HttpGet]
         [EnableCors("AllowAllOrigins")]
         public JsonResult Get(string email)
         {
+            //List<xOrder> orders = _xOrderRepo.GetAll(email);
+
             List<xOrder> orders = new List<xOrder>();
+            orders.Add(new xOrder().InitDummy());
+
             return Json(orders);
         }
 

@@ -31,6 +31,7 @@ namespace GlbXWebService.Controllers
         public int state_id;
         public int zipcode;
         public string email;
+        public string uid;
     }
 
     public class xAddress

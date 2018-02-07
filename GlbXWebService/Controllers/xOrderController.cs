@@ -74,6 +74,8 @@ namespace GlbXWebService.Controllers
         public xOrder InitDummy()
         {
             //R335381310
+            number = "R335381310";
+
             shipment_state = 1.ToString();
             payment_state = 1.ToString();
 
@@ -83,8 +85,8 @@ namespace GlbXWebService.Controllers
             total_quantity = line_items.Count();
             total = "0,00";
 
-            //bill_address = new xAddr().initDummy();
-            //ship_address = new xAddr().initDummy();
+            bill_address = new xAddress().initDummy("asdf");
+            ship_address = new xAddress().initDummy("asdf");
 
             return this;
         }

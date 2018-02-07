@@ -24,10 +24,10 @@ namespace GlbXWebService.Controllers
         {
             //List<xOrder> orders = _xOrderRepo.GetAll(email);
 
-            List<xOrder> orders = new List<xOrder>();
-            orders.Add(new xOrder().InitDummy());
+            List<xOrder> orders = _xOrderRepo.GetAll(email);
+            orders[0].created_at = DateTime.Now.ToString();
 
-            return Json(orders);
+            return Json(_xOrderRepo.GetAll(email));;
         }
 
         [EnableCors("AllowAllOrigins")]
@@ -35,7 +35,7 @@ namespace GlbXWebService.Controllers
         public JsonResult GetOrderDetail(string email, string orderNumber)
         {
             if (email != null)
-                return Json(new xOrder().InitDummy());
+                return Json(_xOrderRepo.Get(email, orderNumber));
 
             return Json(new ReqRes() { nope = true });
         }

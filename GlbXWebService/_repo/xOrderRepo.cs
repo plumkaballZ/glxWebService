@@ -40,6 +40,19 @@ namespace GlbXWebService._repo
 
             return orderUid;
         }
+        public Guid CreateOrderLine(string orderId)
+        {
+            Guid orderLineUid = Guid.NewGuid();
+
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+
+            paramDic.Add("@orderId", orderId);
+            paramDic.Add("@orderLineUid", orderLineUid.ToString());
+
+            Conn.ExecuteSP(new ConnParamz("xOrderLine_Create", paramDic));
+
+            return orderLineUid;
+        }
         public Guid CreateOrderNoUser(string ip)
         {
             Guid orderUid = Guid.NewGuid();
@@ -78,5 +91,19 @@ namespace GlbXWebService._repo
             paramDic.Add("@email", email);
             return Conn.GetList<xOrder>((new ConnParamz("xOrder_GetAll", paramDic))).ToList();
         }
+        public xOrder Get(string email, string orderId)
+        {
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@email", email);
+            paramDic.Add("@orderId", orderId);
+
+            xOrder order = Conn.GetSingle<xOrder>((new ConnParamz("xOrder_Get", paramDic)));
+
+            if (order != null)
+                order.line_items.Add(Conn.GetSingle<xOrderLine>(new ConnParamz("xOrder_GetLine", paramDic)));
+
+            return order;
+        }
+ 
     }
 }

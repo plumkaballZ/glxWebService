@@ -64,7 +64,13 @@ namespace GlbXWebService.Controllers
         [Route("UpdateOrder")]
         public JsonResult UpdateOrder([FromBody]GlxUserRequest req)
         {
-            return Json(new xOrder().InitDummy());
+            if (req.Order.line_items.Count > 0)
+            {
+                req.Order.line_items[0] = new xOrderLine().initDummy();
+                _xOrderRepo.CreateOrderLine(req.Order.id);
+            }
+
+            return Json(req.Order);
         }
     }
 
@@ -94,6 +100,9 @@ namespace GlbXWebService.Controllers
         {
             line_items = new List<xOrderLine>();
             total_quantity = line_items.Count();
+            bill_address = new xAddress();
+            ship_address = new xAddress();
+            created_at = DateTime.Now.ToString();
         }
         public string id { get; set; }
         public string number { get; set; }
@@ -127,6 +136,7 @@ namespace GlbXWebService.Controllers
 
         public xAddress bill_address { get; set; }
         public xAddress ship_address { get; set; }
+        public void addLineItem() { }
 
     }
     public class xOrderLine
@@ -135,11 +145,11 @@ namespace GlbXWebService.Controllers
         {
             id = 1;
             quantity = 1;
-            price = 1;
-            single_display_amount = 1;
-            total = 1;
-            display_amount = 1;
-            variant_id = 1;
+            price = 300;
+            single_display_amount = 300;
+            total = 300;
+            display_amount = 299;
+            variant_id = 777;
 
             image_url = "/assets/api/prods/imgs/prod_10_small.png";
             variant = new Variant();
@@ -147,6 +157,7 @@ namespace GlbXWebService.Controllers
 
             return this;
         }
+
         public int id;
         public int quantity;
         public int price;

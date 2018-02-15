@@ -31,7 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Bifrost\Bifrost\Bifrost.csproj" />
+    <Reference Include="Bifrost">
+      <HintPath>libs\Bifrost\Bifrost.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

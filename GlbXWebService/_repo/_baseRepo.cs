@@ -1,4 +1,4 @@
-﻿using Bifrost.ConnMaster;
+﻿using GlbXWebService.ConnMaster;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;

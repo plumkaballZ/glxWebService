@@ -1,4 +1,6 @@
-﻿using Bifrost.ConnMaster;
+﻿using GlbXWebService.ConnMaster;
+using GlbXWebService.ConnMaster.ext;
+using GlbXWebService.ConnMaster.help;
 using GlbXWebService.Controllers;
 using MySql.Data.MySqlClient;
 using System;

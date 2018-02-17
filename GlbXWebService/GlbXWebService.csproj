@@ -32,8 +32,4 @@
     <None Include="wwwroot\asdf.html" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Bifrost\Bifrost\Bifrost.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlbXWebService", "GlbXWebService\GlbXWebService.csproj", "{B3FEF769-54E9-4DD0-BCAD-6F834DE12DCD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bifrost", "Bifrost\Bifrost\Bifrost.csproj", "{3684AFE0-B79A-44E1-B4EF-B5C1433CFD1C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{B3FEF769-54E9-4DD0-BCAD-6F834DE12DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3FEF769-54E9-4DD0-BCAD-6F834DE12DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3FEF769-54E9-4DD0-BCAD-6F834DE12DCD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3684AFE0-B79A-44E1-B4EF-B5C1433CFD1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3684AFE0-B79A-44E1-B4EF-B5C1433CFD1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3684AFE0-B79A-44E1-B4EF-B5C1433CFD1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3684AFE0-B79A-44E1-B4EF-B5C1433CFD1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

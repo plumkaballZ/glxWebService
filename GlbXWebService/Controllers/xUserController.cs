@@ -88,6 +88,7 @@ namespace GlbXWebService.Controllers
         public string updated_at { get; set; }
         public string bill_address_id { get; set; }
         public string ship_address_id { get; set; }
+        public int lvl { get; set; }
     }
     class ReqRes
     {

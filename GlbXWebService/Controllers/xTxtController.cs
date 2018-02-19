@@ -49,10 +49,11 @@ namespace GlbXWebService.Controllers
             }
 
             if (isNewLine) arrLines.Add(txtFile.rawStr);
-       
 
-            System.IO.File.WriteAllText("/home/plumka/website/glxWebService/GlbXWebService/txt/" + txtFile.fileName, string.Join("\n", arrLines));
+            System.IO.File.WriteAllText(txtFile.fileName, "123123");
 
+
+            //System.IO.File.WriteAllText("/home/plumka/website/glxWebService/GlbXWebService/txt/" + txtFile.fileName, string.Join("\n", arrLines));
             //System.IO.File.WriteAllLines("/home/plumka/website/glxWebService/GlbXWebService/txt/" + txtFile.fileName, arrLines);
 
             return Json("asdf");

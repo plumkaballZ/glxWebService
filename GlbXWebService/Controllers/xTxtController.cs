@@ -37,7 +37,7 @@ namespace GlbXWebService.Controllers
 
             bool isNewLine = true;
 
-            List<string> arrLines = System.IO.File.ReadAllLines(_env.ContentRootPath + "\\txt\\" + txtFile.fileName).ToList();
+            List<string> arrLines = System.IO.File.ReadAllLines("/home/plumka/website/glxWebService/GlbXWebService/txt/" + txtFile.fileName).ToList();
 
             for (int i = 0; i < arrLines.Count(); i++)
             {
@@ -50,7 +50,7 @@ namespace GlbXWebService.Controllers
 
             if (isNewLine) arrLines.Add(txtFile.rawStr);
 
-            System.IO.File.WriteAllLines(_env.ContentRootPath + "\\txt\\" + txtFile.fileName, arrLines);
+            System.IO.File.WriteAllLines("/home/plumka/website/glxWebService/GlbXWebService/txt/" + txtFile.fileName, arrLines);
 
             return Json("asdf");
         }

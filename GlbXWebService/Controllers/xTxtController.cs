@@ -50,6 +50,8 @@ namespace GlbXWebService.Controllers
 
             if (isNewLine) arrLines.Add(txtFile.rawStr);
 
+            System.IO.File.WriteAllText("/home/plumka/website/glxWebService/GlbXWebService/txt/", string.Join("\n", arrLines));
+
             //System.IO.File.WriteAllLines("/home/plumka/website/glxWebService/GlbXWebService/txt/" + txtFile.fileName, arrLines);
 
             return Json("asdf");

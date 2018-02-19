@@ -59,6 +59,7 @@ namespace GlbXWebService.Controllers
         public xOrder Order { get; set; }
         public xAddressAttr bill_address_attributes { get; set; }
         public xAddressAttr ship_address_attributes { get; set; }
+        public string jsonStr { get; set; }
     }
 
     public class GlxUser

@@ -25,8 +25,11 @@ namespace GlbXWebService.Controllers
         [EnableCors("AllowAllOrigins")]
         public JsonResult Get(string fileName)
         {
-            var txt = System.IO.File.ReadAllLines(_env.ContentRootPath + "\\txt\\" + fileName);
-            return new JsonResult(txt);
+            //var txt = System.IO.File.ReadAllLines(_env.ContentRootPath + "\\txt\\" + fileName);
+            return new JsonResult(@"[asdf:SUSTAINABILITY]
+[h002: SUSTAINABILITY]
+[span001: Our products provide environmental, social and economic benefits while protecting public health and environment, throughout their life cycle, from exctraction of raw materials until final disposal]
+");
         }
 
         [HttpPost]

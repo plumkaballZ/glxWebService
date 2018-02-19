@@ -23,10 +23,10 @@ namespace GlbXWebService.Controllers
 
         [HttpGet]
         [EnableCors("AllowAllOrigins")]
-        public string Get(string fileName)
+        public JsonResult Get(string fileName)
         {
-            return _env.ContentRootPath + "\\txt\\" + fileName;
-            //var txt = System.IO.File.ReadAllLines(_env.ContentRootPath + "\\txt\\" + fileName);
+            var txt = System.IO.File.ReadAllLines("/home/plumka/website/glxWebService/GlbXWebService/txt/" + fileName);
+            return new JsonResult(txt);
         }
 
         [HttpPost]

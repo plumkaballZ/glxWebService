@@ -26,9 +26,10 @@ namespace GlbXWebService.Controllers
         [EnableCors("AllowAllOrigins")]
         public JsonResult Get(string fileName)
         {
-            //var txt = System.IO.File.ReadAllLines("/home/plumka/website/glxWebService/GlbXWebService/txt/" + fileName);
-            var json = System.IO.File.ReadAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + fileName);
-       
+            //var json = System.IO.File.ReadAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + fileName);
+
+            var json = System.IO.File.ReadAllText("/home/plumka/website/glxWebService/GlbXWebService/i18n/" + fileName);
+
             return new JsonResult(JsonConvert.DeserializeObject(json));
         }
 
@@ -37,16 +38,16 @@ namespace GlbXWebService.Controllers
         public JsonResult Post([FromBody]GlxUserRequest req)
         {
             var i18 = JsonConvert.DeserializeObject<i_18_Object>(req.jsonStr);
-            var jsonFile = System.IO.File.ReadAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + i18.fileName);
+
+            //var jsonFile = System.IO.File.ReadAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + i18.fileName);
+
+            var jsonFile = System.IO.File.ReadAllText("/home/plumka/website/glxWebService/GlbXWebService/i18n/" + i18.fileName);
 
             JObject jsonObj = JsonConvert.DeserializeObject<JObject>(jsonFile);
 
             jsonObj[i18.page][i18.key] = i18.line;
-
-
             System.IO.File.WriteAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + i18.fileName, jsonObj.ToString());
 
-            //List<string> arrLines = System.IO.File.ReadAllLines("/home/plumka/website/glxWebService/GlbXWebService/txt/" + txtFile.fileName).ToList();
 
             return Json("asdf");
         }

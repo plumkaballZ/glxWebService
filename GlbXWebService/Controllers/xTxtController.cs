@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,39 +26,27 @@ namespace GlbXWebService.Controllers
         [EnableCors("AllowAllOrigins")]
         public JsonResult Get(string fileName)
         {
-            var txt = System.IO.File.ReadAllLines("/home/plumka/website/glxWebService/GlbXWebService/txt/" + fileName);
-            return new JsonResult(txt);
+            //var txt = System.IO.File.ReadAllLines("/home/plumka/website/glxWebService/GlbXWebService/txt/" + fileName);
+            var json = System.IO.File.ReadAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + fileName);
+       
+            return new JsonResult(JsonConvert.DeserializeObject(json));
         }
 
         [HttpPost]
         [EnableCors("AllowAllOrigins")]
         public JsonResult Post([FromBody]GlxUserRequest req)
         {
-            var txtFile = JsonConvert.DeserializeObject<TxtFile>(req.jsonStr);
+            var i18 = JsonConvert.DeserializeObject<i_18_Object>(req.jsonStr);
+            var jsonFile = System.IO.File.ReadAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + i18.fileName);
 
-            bool isNewLine = true;
+            JObject jsonObj = JsonConvert.DeserializeObject<JObject>(jsonFile);
 
-            List<string> arrLines = System.IO.File.ReadAllLines("/home/plumka/website/glxWebService/GlbXWebService/txt/" + txtFile.fileName).ToList();
+            jsonObj[i18.page][i18.key] = i18.line;
 
-            for (int i = 0; i < arrLines.Count(); i++)
-            {
-                if (txtFile.getBetween(arrLines[i], "[", ":") == txtFile.key)
-                {
-                    isNewLine = false;
-                    arrLines[i] = txtFile.rawStr;
-                }
-            }
 
-            if (isNewLine) arrLines.Add(txtFile.rawStr);
+            System.IO.File.WriteAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + i18.fileName, jsonObj.ToString());
 
-            try
-            {
-                System.IO.File.WriteAllLines("/home/plumka/website/glxWebService/GlbXWebService/txt/" + txtFile.fileName, arrLines);
-            }
-            catch (Exception ex)
-            {
-                return Json(ex.ToString());
-            }
+            //List<string> arrLines = System.IO.File.ReadAllLines("/home/plumka/website/glxWebService/GlbXWebService/txt/" + txtFile.fileName).ToList();
 
             return Json("asdf");
         }
@@ -71,6 +60,16 @@ namespace GlbXWebService.Controllers
 
 
     }
+
+    public class i_18_Object
+    {
+        public string fileName { get; set; }
+        public string page { get; set; }
+        public string key { get; set; }
+        public string line { get; set; }
+        
+    }
+
     public class TxtFile
     {
         public string key

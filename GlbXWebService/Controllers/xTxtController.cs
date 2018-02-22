@@ -46,8 +46,10 @@ namespace GlbXWebService.Controllers
             JObject jsonObj = JsonConvert.DeserializeObject<JObject>(jsonFile);
 
             jsonObj[i18.page][i18.key] = i18.line;
-            System.IO.File.WriteAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + i18.fileName, jsonObj.ToString());
 
+            //System.IO.File.WriteAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + i18.fileName, jsonObj.ToString());
+
+            System.IO.File.WriteAllText("/home/plumka/website/glxWebService/GlbXWebService/i18n/" + i18.fileName, jsonObj.ToString());
 
             return Json("asdf");
         }

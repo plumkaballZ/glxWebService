@@ -16,19 +16,22 @@ namespace GlbXWebService.Controllers
     public class xTxtController : Controller
     {
 
+        private string srvPath;
+
         private IHostingEnvironment _env;
         public xTxtController(IHostingEnvironment env)
         {
             _env = env;
+            //srvPath = "C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\";
+            srvPath = "/home/plumka/website/glxWebService/GlbXWebService/i18n/";
         }
 
         [HttpGet]
         [EnableCors("AllowAllOrigins")]
         public JsonResult Get(string fileName)
         {
-            //var json = System.IO.File.ReadAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + fileName);
 
-            var json = System.IO.File.ReadAllText("/home/plumka/website/glxWebService/GlbXWebService/i18n/" + fileName);
+            var json = System.IO.File.ReadAllText(srvPath + fileName);
 
             return new JsonResult(JsonConvert.DeserializeObject(json));
         }
@@ -39,17 +42,13 @@ namespace GlbXWebService.Controllers
         {
             var i18 = JsonConvert.DeserializeObject<i_18_Object>(req.jsonStr);
 
-            //var jsonFile = System.IO.File.ReadAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + i18.fileName);
-
-            var jsonFile = System.IO.File.ReadAllText("/home/plumka/website/glxWebService/GlbXWebService/i18n/" + i18.fileName);
+            var jsonFile = System.IO.File.ReadAllText(srvPath + i18.fileName);
 
             JObject jsonObj = JsonConvert.DeserializeObject<JObject>(jsonFile);
 
             jsonObj[i18.page][i18.key] = i18.line;
 
-            //System.IO.File.WriteAllText("C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\" + i18.fileName, jsonObj.ToString());
-
-            System.IO.File.WriteAllText("/home/plumka/website/glxWebService/GlbXWebService/i18n/" + i18.fileName, jsonObj.ToString());
+            System.IO.File.WriteAllText(srvPath + i18.fileName, jsonObj.ToString());
 
             return Json("asdf");
         }
@@ -60,8 +59,6 @@ namespace GlbXWebService.Controllers
             arrLine[line_to_edit - 1] = newText;
             System.IO.File.WriteAllLines(fileName, arrLine);
         }
-
-
     }
 
     public class i_18_Object
@@ -70,7 +67,7 @@ namespace GlbXWebService.Controllers
         public string page { get; set; }
         public string key { get; set; }
         public string line { get; set; }
-        
+
     }
 
     public class TxtFile

@@ -1,17 +1,22 @@
 {
   "prodDetails": {
-    "h002": "SUSTAINABILITY",
-    "span001": "Our products provide environmental, social and economic benefits while protecting public health and environment, throughout their life cycle, from exctraction of raw materials until final disposal123",
-    "hz001": "Sustainable Card Holder X",
-    "ulz001": "Sustainable Card Holder X",
-    "ulz002": "100% MONEY-BACK GUARANTEE"
+    "h002": "SUSTAINABILITY2224533",
+    "span001": "Our products provide environmental, social and economic benefits while protecting public health and environment, throughout their life cycle, from exctraction of raw materials until final disposal1234",
+    "hz001": "Sustainable Card Holder X22222",
+    "ulz001": "Sustainable Card Holder X2222",
+    "ulz002": "100% MONEY-BACK GUARANTEE3333"
   },
   "prodPrice": {
-    "prodName": "CardHolder X",
-    "pprice": "299,99 DKK",
-    "prodVat": "Additional VAT may apply; charged at checkout"
+    "prodName": "CardHolder X222",
+    "pprice": "299,99 DKK222",
+    "prodVat": "Additional VAT may apply; charged at checkout222233"
   },
   "prodDesc": {
-    "desc": "Stylish card holder in leather"
+    "desc": "Stylish card holder in leather2223222"
+  },
+  "footer": {
+    "mailTxt": "support@theglobalx.com",
+    "about001": "About the company",
+    "about002": "Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet123123"
   }
 }

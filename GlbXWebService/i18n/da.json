@@ -1,0 +1,22 @@
+{
+  "prodDetails": {
+    "h002": "Bæredygtighed",
+    "span001": "\nVores produkter leverer miljømæssige, sociale og økonomiske fordele, samtidig med at man beskytter folkesundheden og miljøet gennem hele deres livscyklus fra ekspansion af råvarer indtil endelig bortskaffelse",
+    "hz001": "Kort Holder X",
+    "ulz001": "ASDF",
+    "ulz002": "100% PENGE TILBAGE"
+  },
+  "prodPrice": {
+    "prodName": "KortHolder ",
+    "pprice": "299,99 DKK",
+    "prodVat": "Noget med moms"
+  },
+  "prodDesc": {
+    "desc": "KortHolder i bla og bla"
+  },
+  "footer": {
+    "mailTxt": "support@theglobalx.com",
+    "about001": "About the company",
+    "about002": "Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet123123"
+  }
+}

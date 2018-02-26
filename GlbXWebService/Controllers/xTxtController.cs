@@ -46,7 +46,21 @@ namespace GlbXWebService.Controllers
 
             JObject jsonObj = JsonConvert.DeserializeObject<JObject>(jsonFile);
 
-            jsonObj[i18.page][i18.key] = i18.line;
+            JObject page = jsonObj[i18.page] as JObject;
+
+            if (page == null)
+                jsonObj.Add(i18.page, JObject.Parse(@"{""" + i18.key + @""":""" + i18.line + @"""}"));
+
+            if (page != null)
+            {
+                var key = page[i18.key];
+
+                if (key == null)
+                    page.Add(i18.key,  i18.line);
+
+                if (key != null)
+                    jsonObj[i18.page][i18.key] = i18.line;
+            }
 
             System.IO.File.WriteAllText(srvPath + i18.fileName, jsonObj.ToString());
 

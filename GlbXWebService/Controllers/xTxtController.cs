@@ -22,8 +22,8 @@ namespace GlbXWebService.Controllers
         public xTxtController(IHostingEnvironment env)
         {
             _env = env;
-            //srvPath = "C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\";
-            srvPath = "/home/plumka/website/glxWebService/GlbXWebService/i18n/";
+            srvPath = "C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\";
+            //srvPath = "/home/plumka/website/glxWebService/GlbXWebService/i18n/";
         }
 
         [HttpGet]

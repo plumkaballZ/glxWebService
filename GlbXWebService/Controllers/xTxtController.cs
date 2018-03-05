@@ -22,8 +22,8 @@ namespace GlbXWebService.Controllers
         public xTxtController(IHostingEnvironment env)
         {
             _env = env;
-            srvPath = "C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\";
-            //srvPath = "/home/plumka/website/glxWebService/GlbXWebService/i18n/";
+            //srvPath = "C:\\super_dev_Z\\glxWebService\\GlbXWebService\\i18n\\";
+            srvPath = "/home/plumka/website/glxWebService/GlbXWebService/i18n/";
         }
 
         [HttpGet]
@@ -56,7 +56,7 @@ namespace GlbXWebService.Controllers
                 var key = page[i18.key];
 
                 if (key == null)
-                    page.Add(i18.key,  i18.line);
+                    page.Add(i18.key, i18.line);
 
                 if (key != null)
                     jsonObj[i18.page][i18.key] = i18.line;

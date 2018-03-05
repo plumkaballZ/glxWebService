@@ -46,7 +46,7 @@ namespace GlbXWebService.Controllers
         [Route("UpdateUser")]
         public JsonResult UpdateUser([FromBody]GlxUserRequest req)
         {
-            return Json(new xOrder().InitDummy());
+            return Json(_xUserRepo.Update(req.xUser));
         }
     }
     public class GlxUserRequest

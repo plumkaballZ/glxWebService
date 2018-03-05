@@ -37,6 +37,16 @@ namespace GlbXWebService._repo
             Conn.ExecuteSP(new ConnParamz("xUser_Create", paramDic));
             return true;
         }
+        public bool Update(xUser user)
+        {
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@userUid", user.uid);
+            paramDic.Add("@userId", user.id);
+
+            Conn.ExecuteSP(new ConnParamz("xUser_Update", paramDic));
+
+            return true;
+        }
         public xUser GetSignle(string refUid)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();

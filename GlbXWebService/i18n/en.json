@@ -56,5 +56,9 @@
     "register": "REGISTER",
     "login": "Login!",
     "haveAccount": "Already have an account?"
+  },
+  "user": {
+    "activeOrders": "My orders",
+    "myAddresses": "My addresses"
   }
 }

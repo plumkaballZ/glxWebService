@@ -54,5 +54,10 @@
     "orUsing": "- Eller via Email -",
     "haveAccount": "Har du allerede en konto?",
     "login": "Log på here!"
+  },
+  "user": {
+    "hello": "Hello {{User.id}}, welcome!",
+    "activeOrders": "Mine ordere",
+    "myAddresses": "Mine addresser"
   }
 }

@@ -55,44 +55,9 @@
     "haveAccount": "Har du allerede en konto?",
     "login": "Log på here!"
   },
-  "lineItem": {
-    "quant": "Antal",
-    "size": "Størrelse",
-    "item2": "299,99 DKK"
-  },
-  "cart": {
-    "myBag": "Min taske: (1)"
-  },
-  "emptyBag": {
-    "quant": "Din taske er tom "
-  },
-  "checkoutHeader": {
-    "bag": "TASKE",
-    "delivery": "LEVERING",
-    "payment": "BETALING"
-  },
-  "contact": {
-    "submitReq": "Skriv til os!",
-    "span001": "Har du et sprøgsmål? så må du gerne skrive til os! :)",
-    "title001": "Kontakt os her:",
-    "submitBtn": "Bekræft",
-    "yName": "Navn",
-    "yEmail": "Email addresse",
-    "ySubject": "Emne",
-    "yDesc": "Besked",
-    "ulz001": "Åbningstider:",
-    "ulz002": "7:00 - 16:00",
-    "ulz003": "Mere info:",
-    "ulz004": "123",
-    "ulz005": "Måske endnu mere info :P?",
-    "ulz006": "CVR?",
-    "ulz007": "123",
-    "ulz008": "456"
-  },
-  "fact": {
-    "h001": "Denne side kommer snart :)"
-  },
-  "aboutUs": {
-    "h001": "Denne side kommer snart :)"
+  "user": {
+    "hello": "Hello {{User.id}}, welcome!",
+    "activeOrders": "Mine ordere",
+    "myAddresses": "Mine addresser"
   }
 }

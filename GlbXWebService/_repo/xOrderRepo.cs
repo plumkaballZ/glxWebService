@@ -93,6 +93,10 @@ namespace GlbXWebService._repo
             paramDic.Add("@email", email);
             return Conn.GetList<xOrder>((new ConnParamz("xOrder_GetAll", paramDic))).ToList();
         }
+        public List<xOrder> GetAll_lvl99()
+        {
+            return Conn.GetList<xOrder>((new ConnParamz("xOrder_GetAll_lvl99", new Dictionary<string, object>()))).ToList();
+        }
         public xOrder Get(string email, string orderId)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();

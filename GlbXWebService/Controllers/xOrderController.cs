@@ -85,7 +85,7 @@ namespace GlbXWebService.Controllers
             shipment_state = 1.ToString();
             payment_state = 1.ToString();
 
-            created_at = DateTime.Now.ToString();
+ 
 
             line_items = new List<xOrderLine>();
             total_quantity = line_items.Count();
@@ -102,7 +102,7 @@ namespace GlbXWebService.Controllers
             total_quantity = line_items.Count();
             bill_address = new xAddress();
             ship_address = new xAddress();
-            created_at = DateTime.Now.ToString();
+
         }
         public string id { get; set; }
         public string number { get; set; }
@@ -112,7 +112,7 @@ namespace GlbXWebService.Controllers
         public string state { get; set; }
         public string adjustment_total { get; set; }
         public string user_id { get; set; }
-        public string created_at { get; set; }
+        public DateTime created_at { get; set; }
         public string updated_at { get; set; }
         public string completed_at { get; set; }
         public string payment_total { get; set; }

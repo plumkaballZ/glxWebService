@@ -21,12 +21,7 @@ namespace GlbXWebService.Controllers
         [HttpGet]
         [EnableCors("AllowAllOrigins")]
         public JsonResult Get(string email)
-        {
-            //List<xOrder> orders = _xOrderRepo.GetAll(email);
-
-            List<xOrder> orders = _xOrderRepo.GetAll(email);
-            orders[0].created_at = DateTime.Now.ToString();
-
+        {   
             return Json(_xOrderRepo.GetAll(email));;
         }
 
@@ -38,6 +33,14 @@ namespace GlbXWebService.Controllers
                 return Json(_xOrderRepo.Get(email, orderNumber));
 
             return Json(new ReqRes() { nope = true });
+        }
+
+        [HttpGet]
+        [EnableCors("AllowAllOrigins")]
+        [Route("GetOrdersLvl99")]
+        public JsonResult GetOrdersLvl99(string email)
+        {
+            return Json(_xOrderRepo.GetAll_lvl99()); 
         }
 
         [HttpPost]

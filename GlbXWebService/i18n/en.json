@@ -18,7 +18,9 @@
   "footer": {
     "mailTxt": "support@theglobalx.com",
     "about001": "About the company",
-    "about002": "Our company has been created with sustainability in mind. We care about the enviroment and we produce our products in the most responsible ways possible. Our mission is to make quality products without compromise"
+    "about002": "Our company has been created with sustainability in mind. We care about the enviroment and we produce our products in the most responsible ways possible. Our mission is to make quality products without compromise",
+    "logoTxt01": "Shevlin",
+    "logoTxt02": ".co"
   },
   "header": {
     "home": "Home",
@@ -56,5 +58,56 @@
     "register": "REGISTER",
     "login": "Login!",
     "haveAccount": "Already have an account?"
+  },
+  "cart": {
+    "myBag": "My Shopping Bag ",
+    "total": "Total: 299,99 DKK"
+  },
+  "lineItem": {
+    "myBag": "TGX Cardholder by Shevlin",
+    "item1": "TGX Cardholder by Shevlin",
+    "item2": "299,99 DKK",
+    "size": "Size",
+    "quant": "Quantity"
+  },
+  "emptyBag": {
+    "quant": "    Your Shopping Bag is empty"
+  },
+  "orderSum": {
+    "cupons": "Coupons",
+    "giftCard": "Gift wrap for $1",
+    "cashCard": "Cash/Card On Delivery not available",
+    "bagTotal": "Bag Total",
+    "cuponDiscount": "Coupon Discount"
+  },
+  "checkoutHeader": {
+    "bag": "BAG",
+    "delivery": "DELIVERY",
+    "payment": "PAYMENT"
+  },
+  "contact": {
+    "submitReq": "Submit a request",
+    "span001": "Have a request or question, then please write to us :)",
+    "submitBtn": "Submit",
+    "title001": "Contact us here",
+    "ulz001": "          HOURS OF OPERATION",
+    "ulz002": "MON-FRI 9AM–4PM EST",
+    "ulz003": "CONTACT US",
+    "ulz004": "Call 1-518-400-1050 ",
+    "ulz005": " OR",
+    "ulz006": "           OUR LOCATION",
+    "ulz007": "19 Wood Rd, Suite 500",
+    "ulz008": " Round Lake, NY, 12151",
+    "yName": "Name",
+    "yEmail": "Email",
+    "ySubject": "Subject",
+    "yDesc": "Description"
+  },
+  "aboutUs": {
+    "h001": "This page is comming soon :)",
+    "p001": "  Sorry for the inconvenience but this site is still under construction"
+  },
+  "fact": {
+    "h001": "This page is comming soon :)"
   }
 }

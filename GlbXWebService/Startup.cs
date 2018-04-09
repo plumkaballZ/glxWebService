@@ -42,7 +42,6 @@ namespace GlbXWebService
             .AddFormatterMappings()
             .AddJsonFormatters();
 
-
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",

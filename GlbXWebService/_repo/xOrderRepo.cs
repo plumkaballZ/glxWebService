@@ -42,7 +42,7 @@ namespace GlbXWebService._repo
 
             return orderUid;
         }
-        public Guid CreateOrderLine(string orderId)
+        public Guid CreateOrderLine(string orderId, xOrderLine line)
         {
             Guid orderLineUid = Guid.NewGuid();
 
@@ -50,6 +50,11 @@ namespace GlbXWebService._repo
 
             paramDic.Add("@orderId", orderId);
             paramDic.Add("@orderLineUid", orderLineUid.ToString());
+
+            paramDic.Add("@prodUid", line.variant_id);
+            paramDic.Add("@price", line.display_amount);
+            paramDic.Add("@quant", line.quantity);
+
 
             Conn.ExecuteSP(new ConnParamz("xOrderLine_Create", paramDic));
 
@@ -75,7 +80,14 @@ namespace GlbXWebService._repo
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
             paramDic.Add("@ip", ip);
 
-            return Conn.GetSingle<xOrder>(new ConnParamz("xOrder_GetCurrentNoUser", paramDic));
+            var currOrder = Conn.GetSingle<xOrder>(new ConnParamz("xOrder_GetCurrentNoUser", paramDic));
+
+            Dictionary<string, object> paramDic2 = new Dictionary<string, object>();
+            paramDic2.Add("@email", currOrder.email);
+            paramDic2.Add("@orderId", currOrder.id);
+            currOrder.line_items = Conn.GetList<xOrderLine>((new ConnParamz("xOrder_GetLine", paramDic2))).ToList();
+
+            return currOrder;
         }
 
         public xOrder GetCurrentOrder(string email)
@@ -83,8 +95,14 @@ namespace GlbXWebService._repo
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
             paramDic.Add("@email", email);
 
+            var currOrder = Conn.GetSingle<xOrder>(new ConnParamz("xOrder_GetCurrent", paramDic));
 
-            return Conn.GetSingle<xOrder>(new ConnParamz("xOrder_GetCurrent", paramDic));
+            Dictionary<string, object> paramDic2 = new Dictionary<string, object>();
+            paramDic.Add("@email", currOrder.email);
+            paramDic.Add("@orderId", currOrder.id);
+            currOrder.line_items = Conn.GetList<xOrderLine>((new ConnParamz("xOrder_GetLine", paramDic2))).ToList();
+
+            return currOrder;
         }
         public List<xOrder> GetAll(string email)
         {
@@ -95,7 +113,18 @@ namespace GlbXWebService._repo
         }
         public List<xOrder> GetAll_lvl99()
         {
-            return Conn.GetList<xOrder>((new ConnParamz("xOrder_GetAll_lvl99", new Dictionary<string, object>()))).ToList();
+            List<xOrder> orderz = Conn.GetList<xOrder>((new ConnParamz("xOrder_GetAll_lvl99", new Dictionary<string, object>()))).ToList();
+
+            foreach (xOrder order in orderz)
+            {
+                Dictionary<string, object> paramDic = new Dictionary<string, object>();
+                paramDic.Add("@email", order.email);
+                paramDic.Add("@orderId", order.id);
+                order.line_items = Conn.GetList<xOrderLine>((new ConnParamz("xOrder_GetLine", paramDic))).ToList();
+            }
+
+            return orderz;
+
         }
         public xOrder Get(string email, string orderId)
         {

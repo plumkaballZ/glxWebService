@@ -66,8 +66,8 @@ namespace GlbXWebService.Controllers
         {
             if (req.Order.line_items.Count > 0)
             {
-                req.Order.line_items[0] = new xOrderLine().initDummy();
-                _xOrderRepo.CreateOrderLine(req.Order.id);
+                foreach (var orderLine in req.Order.line_items)
+                    _xOrderRepo.CreateOrderLine(req.Order.id, orderLine);
             }
 
             return Json(req.Order);

@@ -24,12 +24,12 @@ namespace GlbXWebService.Controllers
         public string address1;
         public string address2;
         public string city;
-        public int country_id;
+        public string country_id;
         public string firstname;
         public string lastname;
         public string phone;
-        public int state_id;
-        public int zipcode;
+        public string state_id;
+        public string zipcode;
         public string email;
         public string uid;
     }

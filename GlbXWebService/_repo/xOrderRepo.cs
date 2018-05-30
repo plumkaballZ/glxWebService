@@ -82,10 +82,15 @@ namespace GlbXWebService._repo
 
             var currOrder = Conn.GetSingle<xOrder>(new ConnParamz("xOrder_GetCurrentNoUser", paramDic));
 
-            Dictionary<string, object> paramDic2 = new Dictionary<string, object>();
-            paramDic2.Add("@email", currOrder.email);
-            paramDic2.Add("@orderId", currOrder.id);
-            currOrder.line_items = Conn.GetList<xOrderLine>((new ConnParamz("xOrder_GetLine", paramDic2))).ToList();
+            if (currOrder.id != null)
+            {
+                Dictionary<string, object> paramDic2 = new Dictionary<string, object>();
+                paramDic2.Add("@email", currOrder.email);
+                paramDic2.Add("@orderId", currOrder.id);
+                currOrder.line_items = Conn.GetList<xOrderLine>((new ConnParamz("xOrder_GetLine", paramDic2))).ToList();
+            }
+
+            
 
             return currOrder;
         }
@@ -97,10 +102,15 @@ namespace GlbXWebService._repo
 
             var currOrder = Conn.GetSingle<xOrder>(new ConnParamz("xOrder_GetCurrent", paramDic));
 
-            Dictionary<string, object> paramDic2 = new Dictionary<string, object>();
-            paramDic.Add("@email", currOrder.email);
-            paramDic.Add("@orderId", currOrder.id);
-            currOrder.line_items = Conn.GetList<xOrderLine>((new ConnParamz("xOrder_GetLine", paramDic2))).ToList();
+            if (currOrder.id != null)
+            {
+                Dictionary<string, object> paramDic2 = new Dictionary<string, object>();
+                paramDic2.Add("@email", email);
+                paramDic2.Add("@orderId", currOrder.id);
+                currOrder.line_items = Conn.GetList<xOrderLine>((new ConnParamz("xOrder_GetLine", paramDic2))).ToList();
+            }
+
+         
 
             return currOrder;
         }

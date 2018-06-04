@@ -12,10 +12,12 @@ namespace GlbXWebService.Controllers
     public class xOrdersController : Controller
     {
         private xOrderRepo _xOrderRepo;
+        private xAddressRepo _xAddrRepo;
 
         public xOrdersController()
         {
             _xOrderRepo = new xOrderRepo();
+            _xAddrRepo = new xAddressRepo();
         }
 
         [HttpGet]
@@ -30,7 +32,11 @@ namespace GlbXWebService.Controllers
         public JsonResult GetOrderDetail(string email, string orderNumber)
         {
             if (email != null)
-                return Json(_xOrderRepo.Get(email, orderNumber));
+            {
+                xOrder order = _xOrderRepo.Get(email, orderNumber);
+                order.ship_address = _xAddrRepo.Get(order.addressUid);
+                return Json(order);
+            }
 
             return Json(new ReqRes() { nope = true });
         }

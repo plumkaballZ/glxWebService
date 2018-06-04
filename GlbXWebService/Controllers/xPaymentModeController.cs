@@ -16,7 +16,7 @@ namespace GlbXWebService.Controllers
         {
             PaymentSuper super = new PaymentSuper();
             List<PaymentMode> payment_methods = new List<PaymentMode>();
-            payment_methods.Add(new PaymentMode(1, "Credit Card", "Bogus payment gateway."));
+            //payment_methods.Add(new PaymentMode(1, "Credit Card", "Bogus payment gateway."));
             payment_methods.Add(new PaymentMode(2, "PayPal", "Pay with PayPal"));
 
             super.payment_methods = payment_methods;

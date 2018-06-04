@@ -27,7 +27,6 @@ namespace GlbXWebService.Controllers
             if (email == null)
             {
                 var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
-
                 if (_xOrderRepo.CheckNoUser(ip)) return Json(_xOrderRepo.GetCurrentOrderNoUser(ip));
 
             }
@@ -44,12 +43,10 @@ namespace GlbXWebService.Controllers
         public JsonResult Post([FromBody]GlxUserRequest req)
         {
             var loingUid = _xUserRepo.Login(req.glxUser.email, req.glxUser.password);
-
             if (loingUid == null)
             {
                 var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
                 if (!_xOrderRepo.CheckNoUser(ip)) _xOrderRepo.CreateOrderNoUser(ip);
-
             }
             else
             {
@@ -64,10 +61,18 @@ namespace GlbXWebService.Controllers
         [Route("UpdateOrder")]
         public JsonResult UpdateOrder([FromBody]GlxUserRequest req)
         {
-            if (req.Order.line_items.Count > 0)
+            if (req.Order.payment_state == "0")
+                _xOrderRepo.SetPaymentDone(req.Order.id, req.Order.ship_address.uid);
+
+            if (req.Order.line_items.Count > 0 && req.Order.payment_state == "1")
             {
                 foreach (var orderLine in req.Order.line_items)
-                    _xOrderRepo.CreateOrderLine(req.Order.id, orderLine);
+                {
+                    if (string.IsNullOrEmpty(orderLine.delStr))
+                        _xOrderRepo.CreateOrderLine(req.Order.id, orderLine);
+                    else
+                        _xOrderRepo.DeleteOrderLine(req.Order.id, orderLine);
+                }
             }
 
             return Json(req.Order);
@@ -85,11 +90,10 @@ namespace GlbXWebService.Controllers
             shipment_state = 1.ToString();
             payment_state = 1.ToString();
 
- 
+
 
             line_items = new List<xOrderLine>();
             total_quantity = line_items.Count();
-            total = "0,00";
 
             bill_address = new xAddress().initDummy("asdf");
             ship_address = new xAddress().initDummy("asdf");
@@ -104,10 +108,24 @@ namespace GlbXWebService.Controllers
             ship_address = new xAddress();
 
         }
+        public string addressUid { get; set; }
         public string id { get; set; }
         public string number { get; set; }
         public string item_total { get; set; }
-        public string total { get; set; }
+        public string total
+        {
+            get
+            {
+                int total = 0;
+
+                foreach (var lineItem in line_items)
+                    total += lineItem.price;
+
+
+                return total.ToString();
+            }
+
+        }
         public string ship_total { get; set; }
         public string state { get; set; }
         public string adjustment_total { get; set; }
@@ -166,6 +184,7 @@ namespace GlbXWebService.Controllers
         public int display_amount;
         public int variant_id;
         public string image_url;
+        public string delStr;
 
         public Variant variant;
 

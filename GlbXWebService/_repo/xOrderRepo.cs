@@ -28,7 +28,25 @@ namespace GlbXWebService._repo
 
             return Conn.GetSingle<int>(new ConnParamz("xOrder_CheckNoUser", paramDic)) == 1 ? true : false;
         }
+        public bool CheckByIp(string ip)
+        {
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@ip", ip);
 
+            return Conn.GetSingle<int>(new ConnParamz("xOrder_Check_Ip", paramDic)) == 1 ? true : false;
+        }
+
+        public bool updateOrder(string orderUid, string userUid)
+        {
+   
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();  
+            paramDic.Add("@orderUid", orderUid);
+            paramDic.Add("@userUid", userUid);
+
+            Conn.ExecuteSP(new ConnParamz("xOrder_Update", paramDic));
+
+            return true;
+        }
         public Guid CreateOrder(string userUid)
         {
             Guid orderUid = Guid.NewGuid();
@@ -42,6 +60,7 @@ namespace GlbXWebService._repo
 
             return orderUid;
         }
+
         public Guid CreateOrderLine(string orderId, xOrderLine line)
         {
             Guid orderLineUid = Guid.NewGuid();
@@ -82,6 +101,17 @@ namespace GlbXWebService._repo
             paramDic.Add("@addressUid", addressUid);
 
             Conn.ExecuteSP(new ConnParamz("xOrder_SetPaymentDone", paramDic));
+
+            return true;
+        }
+        public bool SetShipmentSent(string orderId, string addressUid)
+        {
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+
+            paramDic.Add("@orderId", orderId);
+            paramDic.Add("@addressUid", addressUid);
+
+            Conn.ExecuteSP(new ConnParamz("xOrder_SetShipmentSent", paramDic));
 
             return true;
         }

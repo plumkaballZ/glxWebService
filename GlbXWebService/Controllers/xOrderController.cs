@@ -43,15 +43,24 @@ namespace GlbXWebService.Controllers
         public JsonResult Post([FromBody]GlxUserRequest req)
         {
             var loingUid = _xUserRepo.Login(req.glxUser.email, req.glxUser.password);
+            var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+
             if (loingUid == null)
             {
-                var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+              
                 if (!_xOrderRepo.CheckNoUser(ip)) _xOrderRepo.CreateOrderNoUser(ip);
             }
             else
             {
                 var userUid = _xUserRepo.GetSignle(loingUid).uid;
-                if (!_xOrderRepo.Check(req.glxUser.email)) _xOrderRepo.CreateOrder(userUid);
+
+                if (!_xOrderRepo.Check(req.glxUser.email))
+                {
+                    if (_xOrderRepo.CheckByIp(ip))
+                        _xOrderRepo.updateOrder("", userUid);
+                    else
+                        _xOrderRepo.CreateOrder(userUid);
+                }                  
             }
 
             return Json(new xOrder().InitDummy());
@@ -61,16 +70,22 @@ namespace GlbXWebService.Controllers
         [Route("UpdateOrder")]
         public JsonResult UpdateOrder([FromBody]GlxUserRequest req)
         {
-            if (req.Order.payment_state == "0")
-                _xOrderRepo.SetPaymentDone(req.Order.id, req.Order.ship_address.uid);
-
-            if (req.Order.line_items.Count > 0 && req.Order.payment_state == "1")
+            if (req.Order != null)
             {
-                foreach (var orderLine in req.Order.line_items)
+                if (req.Order.special_instructions == "updatePayment")
+                    _xOrderRepo.SetPaymentDone(req.Order.id, req.Order.ship_address.uid);
+
+                if (req.Order.special_instructions == "updateShipment")
+                    _xOrderRepo.SetShipmentSent(req.Order.id, req.Order.ship_address.uid);
+
+                if (req.Order.special_instructions == "addLineItem")
                 {
-                    if (string.IsNullOrEmpty(orderLine.delStr))
+                    foreach (var orderLine in req.Order.line_items)
                         _xOrderRepo.CreateOrderLine(req.Order.id, orderLine);
-                    else
+                }
+                if (req.Order.special_instructions == "deleteLineItem")
+                {
+                    foreach (var orderLine in req.Order.line_items)
                         _xOrderRepo.DeleteOrderLine(req.Order.id, orderLine);
                 }
             }

@@ -28,7 +28,7 @@ namespace GlbXWebService._repo
 
             return Conn.GetSingle<int>(new ConnParamz("xOrder_CheckNoUser", paramDic)) == 1 ? true : false;
         }
-        public bool CheckByIp(string ip)
+        public bool Check_ip(string ip)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
             paramDic.Add("@ip", ip);
@@ -36,18 +36,19 @@ namespace GlbXWebService._repo
             return Conn.GetSingle<int>(new ConnParamz("xOrder_Check_Ip", paramDic)) == 1 ? true : false;
         }
 
-        public bool updateOrder(string orderUid, string userUid)
+        public bool updateOrder_ip(string userUid, string ip)
         {
    
             Dictionary<string, object> paramDic = new Dictionary<string, object>();  
-            paramDic.Add("@orderUid", orderUid);
-            paramDic.Add("@userUid", userUid);
 
-            Conn.ExecuteSP(new ConnParamz("xOrder_Update", paramDic));
+            paramDic.Add("@userUid", userUid);
+            paramDic.Add("@ip", ip);
+
+            Conn.ExecuteSP(new ConnParamz("xOrder_Update_Ip", paramDic));
 
             return true;
         }
-        public Guid CreateOrder(string userUid)
+        public Guid CreateOrder(string userUid, string ip)
         {
             Guid orderUid = Guid.NewGuid();
 
@@ -55,6 +56,7 @@ namespace GlbXWebService._repo
 
             paramDic.Add("@userUid", userUid);
             paramDic.Add("@orderUid", orderUid.ToString());
+            paramDic.Add("@ip", ip);
 
             Conn.ExecuteSP(new ConnParamz("xOrder_Create", paramDic));
 

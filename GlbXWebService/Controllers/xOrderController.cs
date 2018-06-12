@@ -28,7 +28,6 @@ namespace GlbXWebService.Controllers
             {
                 var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
                 if (_xOrderRepo.CheckNoUser(ip)) return Json(_xOrderRepo.GetCurrentOrderNoUser(ip));
-
             }
             else
             {
@@ -47,19 +46,28 @@ namespace GlbXWebService.Controllers
 
             if (loingUid == null)
             {
-              
-                if (!_xOrderRepo.CheckNoUser(ip)) _xOrderRepo.CreateOrderNoUser(ip);
-            }
+                if (!_xOrderRepo.CheckNoUser(ip))
+                {
+                    _xOrderRepo.CreateOrderNoUser(ip);
+                    return Json(_xOrderRepo.GetCurrentOrderNoUser(ip));
+                }
+            } 
             else
             {
                 var userUid = _xUserRepo.GetSignle(loingUid).uid;
 
                 if (!_xOrderRepo.Check(req.glxUser.email))
                 {
-                    if (_xOrderRepo.CheckByIp(ip))
-                        _xOrderRepo.updateOrder("", userUid);
+                    if (_xOrderRepo.Check_ip(ip))
+                    {
+                        _xOrderRepo.updateOrder_ip(userUid, ip);
+                    }
                     else
-                        _xOrderRepo.CreateOrder(userUid);
+                    {
+                        _xOrderRepo.CreateOrder(userUid, ip);
+                    }
+
+                    return Json(_xOrderRepo.GetCurrentOrder(req.glxUser.email));
                 }                  
             }
 

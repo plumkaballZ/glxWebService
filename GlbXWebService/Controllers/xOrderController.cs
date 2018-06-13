@@ -94,7 +94,12 @@ namespace GlbXWebService.Controllers
                 if (req.Order.special_instructions == "deleteLineItem")
                 {
                     foreach (var orderLine in req.Order.line_items)
-                        _xOrderRepo.DeleteOrderLine(req.Order.id, orderLine);
+                    {
+                        if (orderLine.delStr == "true")
+                        {
+                            _xOrderRepo.DeleteOrderLine(req.Order.id, orderLine);
+                        }
+                    }
                 }
             }
 

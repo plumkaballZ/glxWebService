@@ -75,7 +75,8 @@ namespace GlbXWebService._repo
             paramDic.Add("@prodUid", line.variant_id);
             paramDic.Add("@price", line.display_amount);
             paramDic.Add("@quant", line.quantity);
-
+            paramDic.Add("@size", line.size);
+            paramDic.Add("@color", line.color);
 
             Conn.ExecuteSP(new ConnParamz("xOrderLine_Create", paramDic));
 

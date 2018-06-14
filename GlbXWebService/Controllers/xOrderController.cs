@@ -214,6 +214,9 @@ namespace GlbXWebService.Controllers
         public string image_url;
         public string delStr;
 
+        public string color;
+        public string size;
+
         public Variant variant;
 
     }

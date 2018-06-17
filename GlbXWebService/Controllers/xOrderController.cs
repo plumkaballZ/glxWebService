@@ -1,5 +1,6 @@
 ﻿using GlbXWebService._repo;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace GlbXWebService.Controllers
     {
         private xOrderRepo _xOrderRepo;
         private xUserRepo _xUserRepo;
+        private IHttpContextAccessor _accessor;
 
-        public xOrderController()
+        public xOrderController(IHttpContextAccessor accessor)
         {
             _xOrderRepo = new xOrderRepo();
             _xUserRepo = new xUserRepo();
+            _accessor = accessor;
         }
 
         [HttpGet]
@@ -26,7 +29,8 @@ namespace GlbXWebService.Controllers
         {
             if (email == null)
             {
-                var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+
+                var ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
                 if (_xOrderRepo.CheckNoUser(ip)) return Json(_xOrderRepo.GetCurrentOrderNoUser(ip));
             }
             else
@@ -42,7 +46,7 @@ namespace GlbXWebService.Controllers
         public JsonResult Post([FromBody]GlxUserRequest req)
         {
             var loingUid = _xUserRepo.Login(req.glxUser.email, req.glxUser.password);
-            var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            var ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
 
             if (loingUid == null)
             {

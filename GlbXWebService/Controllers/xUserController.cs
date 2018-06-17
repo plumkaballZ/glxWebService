@@ -1,6 +1,7 @@
 ﻿using System;
 using GlbXWebService._repo;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GlbXWebService.Controllers
@@ -9,10 +10,12 @@ namespace GlbXWebService.Controllers
     public class xUserController : Controller
     {
         private xUserRepo _xUserRepo;
+        private IHttpContextAccessor _accessor;
 
-        public xUserController()
+        public xUserController(IHttpContextAccessor accessor)
         {
             _xUserRepo = new xUserRepo();
+            _accessor = accessor;
         }
 
         [HttpGet]
@@ -33,7 +36,7 @@ namespace GlbXWebService.Controllers
         {
             if (!_xUserRepo.CheckLogin(req.glxUser.email))
             {
-                req.glxUser.ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+                req.glxUser.ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
                 var loginUid = _xUserRepo.CreateLogin(req.glxUser);
                 _xUserRepo.Create(loginUid);
 

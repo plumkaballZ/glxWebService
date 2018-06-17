@@ -36,7 +36,7 @@ namespace GlbXWebService.Controllers
         {
             if (!_xUserRepo.CheckLogin(req.glxUser.email))
             {
-                req.glxUser.ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
+                req.glxUser.ip = req.glxUser.ip;
                 var loginUid = _xUserRepo.CreateLogin(req.glxUser);
                 _xUserRepo.Create(loginUid);
 

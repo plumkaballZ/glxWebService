@@ -22,9 +22,9 @@ namespace GlbXWebService.Controllers
 
         [HttpGet]
         [EnableCors("AllowAllOrigins")]
-        public JsonResult Get(string email)
+        public JsonResult Get(string email, string ip)
         {   
-            return Json(_xOrderRepo.GetAll(email));;
+            return Json(_xOrderRepo.GetAll(email, ip));;
         }
 
         [EnableCors("AllowAllOrigins")]

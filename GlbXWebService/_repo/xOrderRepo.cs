@@ -173,11 +173,13 @@ namespace GlbXWebService._repo
 
             return currOrder;
         }
-        public List<xOrder> GetAll(string email)
+        public List<xOrder> GetAll(string email, string ip)
         {
 
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
             paramDic.Add("@email", email);
+            paramDic.Add("@ip", ip);
+
             return Conn.GetList<xOrder>((new ConnParamz("xOrder_GetAll", paramDic))).ToList();
         }
         public List<xOrder> GetAll_lvl99()

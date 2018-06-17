@@ -27,10 +27,11 @@ namespace GlbXWebService.Controllers
         [EnableCors("AllowAllOrigins")]
         public JsonResult Get(string email)
         {
-            if (email == null)
-            {
+            Guid bla = new Guid();
 
-                var ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
+            if (Guid.TryParse(email, out bla))
+            {
+                var ip = email;
                 if (_xOrderRepo.CheckNoUser(ip)) return Json(_xOrderRepo.GetCurrentOrderNoUser(ip));
             }
             else
@@ -46,7 +47,7 @@ namespace GlbXWebService.Controllers
         public JsonResult Post([FromBody]GlxUserRequest req)
         {
             var loingUid = _xUserRepo.Login(req.glxUser.email, req.glxUser.password);
-            var ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
+            var ip = req.glxUser.ip;
 
             if (loingUid == null)
             {

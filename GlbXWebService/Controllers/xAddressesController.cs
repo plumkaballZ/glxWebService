@@ -50,6 +50,7 @@ namespace GlbXWebService.Controllers
             lastname = atr.lastname;
             phone = atr.phone;
             full_name = "";
+            state_id = atr.state_id;
         }
 
         public xAddress initDummy(string firstName)

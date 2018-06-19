@@ -27,6 +27,7 @@ namespace GlbXWebService._repo
             paramDic.Add("@phone", addAttr.phone);
             paramDic.Add("@email", email);
             paramDic.Add("@uid", adrUid);
+            paramDic.Add("@_ip", addAttr.state_id);
 
             
 

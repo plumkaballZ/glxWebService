@@ -96,12 +96,13 @@ namespace GlbXWebService._repo
 
             return true;
         }
-        public bool SetPaymentDone(string orderId, string addressUid)
+        public bool SetPaymentDone(string orderId, string addressUid, int shipTotal)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
 
             paramDic.Add("@orderId", orderId);
             paramDic.Add("@addressUid", addressUid);
+            paramDic.Add("@shipTotal", shipTotal);
 
             Conn.ExecuteSP(new ConnParamz("xOrder_SetPaymentDone", paramDic));
 

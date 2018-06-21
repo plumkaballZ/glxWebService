@@ -86,7 +86,7 @@ namespace GlbXWebService.Controllers
             if (req.Order != null)
             {
                 if (req.Order.special_instructions == "updatePayment")
-                    _xOrderRepo.SetPaymentDone(req.Order.id, req.Order.ship_address.uid);
+                    _xOrderRepo.SetPaymentDone(req.Order.id, req.Order.ship_address.uid, req.Order.ship_total);
 
                 if (req.Order.special_instructions == "updateShipment")
                     _xOrderRepo.SetShipmentSent(req.Order.id, req.Order.ship_address.uid);
@@ -144,7 +144,18 @@ namespace GlbXWebService.Controllers
         public string addressUid { get; set; }
         public string id { get; set; }
         public string number { get; set; }
-        public string item_total { get; set; }
+        public string item_total {
+
+            get
+            {
+                int item_total = 0;
+
+                foreach (var lineItem in line_items)
+                    item_total += lineItem.quantity;
+
+                return item_total.ToString();
+            }
+        }
         public string total
         {
             get
@@ -152,14 +163,14 @@ namespace GlbXWebService.Controllers
                 int total = 0;
 
                 foreach (var lineItem in line_items)
-                    total += lineItem.price;
+                    total += (lineItem.price * lineItem.quantity);
 
 
                 return total.ToString();
             }
 
         }
-        public string ship_total { get; set; }
+        public int ship_total { get; set; }
         public string state { get; set; }
         public string adjustment_total { get; set; }
         public string user_id { get; set; }
@@ -198,7 +209,6 @@ namespace GlbXWebService.Controllers
             quantity = 1;
             price = 300;
             single_display_amount = 300;
-            total = 300;
             display_amount = 299;
             variant_id = 777;
 
@@ -213,7 +223,7 @@ namespace GlbXWebService.Controllers
         public int quantity;
         public int price;
         public int single_display_amount;
-        public int total;
+        public int total { get { return price * quantity; } }
         public int display_amount;
         public int variant_id;
         public string image_url;

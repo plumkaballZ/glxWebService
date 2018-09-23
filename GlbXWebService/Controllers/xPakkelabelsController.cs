@@ -14,22 +14,33 @@ namespace GlbXWebService.Controllers
     [Route("api/[controller]")]
     public class xPakkelabelsController : Controller
     {
-        private PakkeLabelsApiClient _apiClinet;
+        private PakkelabelsApiClient _apiClinet;
 
         public xPakkelabelsController()
         {
-            _apiClinet = new PakkeLabelsApiClient();
+            _apiClinet = new PakkelabelsApiClient();
         }
+
 
         [HttpGet]
         [EnableCors("AllowAllOrigins")]
-        public string Get()
+        public async Task<string> Get()
         {
+            var str = await _apiClinet.GetLogin();
+            var st2 = await _apiClinet.GetGlsDropPoints();
 
-            _apiClinet.test();
-
-            return "service_running_x4";
+            return str;
         }
+
+        //[HttpGet]
+        //[EnableCors("AllowAllOrigins")]
+        //public string Get()
+        //{
+        //    _apiClinet.test();
+        //    return "service_running_x4";
+        //}
+
+
 
     }
 }

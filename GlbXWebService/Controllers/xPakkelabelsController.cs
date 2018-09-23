@@ -24,23 +24,17 @@ namespace GlbXWebService.Controllers
 
         [HttpGet]
         [EnableCors("AllowAllOrigins")]
-        public async Task<string> Get()
+        public async Task<string> Get(string token, string expires_at)
         {
-            var str = await _apiClinet.GetLogin();
-            var st2 = await _apiClinet.GetGlsDropPoints();
+            var str = "empy";
 
+            if (token == "n")
+                str = await _apiClinet.GetLogin();
+
+            //var str = await _apiClinet.GetLogin();
+            //var st2 = await _apiClinet.GetGlsDropPoints();
             return str;
         }
-
-        //[HttpGet]
-        //[EnableCors("AllowAllOrigins")]
-        //public string Get()
-        //{
-        //    _apiClinet.test();
-        //    return "service_running_x4";
-        //}
-
-
 
     }
 }

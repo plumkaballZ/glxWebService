@@ -49,7 +49,13 @@ namespace GlbXWebService._logics
         }
         public async Task<string> GetFreightRatesByCountry()
         {
-            return await GetRequest("https://app.pakkelabels.dk/api/public/v2/shipments/freight_rates", new { token = _token.Token, country = "US" });
+            var responseString = await "https://app.pakkelabels.dk/api/public/v2/users/login"
+                .PostUrlEncodedAsync(new { api_user = "0930aeb1-1412-4260-9f19-63fb1d010720", api_key = "1031bb73-6770-46eb-9960-6b1ab31d322e" })
+                .ReceiveString();
+
+            _token = JsonConvert.DeserializeObject<PakkelabelsToken>(responseString);
+
+            return await GetRequest("https://app.pakkelabels.dk/api/public/v2/shipments/freight_rates", new { token = _token.token, country = "DK" });
         }
         public async Task<string> GetBalance()
         {

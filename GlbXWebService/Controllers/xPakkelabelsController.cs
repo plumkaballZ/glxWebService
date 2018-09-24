@@ -30,9 +30,20 @@ namespace GlbXWebService.Controllers
 
             if (token == "n")
                 str = await _apiClinet.GetLogin();
-
             //var str = await _apiClinet.GetLogin();
             //var st2 = await _apiClinet.GetGlsDropPoints();
+
+            return str;
+        }
+
+        [EnableCors("AllowAllOrigins")]
+        [Route("GetFreightRates")]
+        public async Task<string> GetFreightRates(string token, string country)
+        {
+            var str = "empty";
+
+            str = await _apiClinet.GetFreightRatesByCountry();
+
             return str;
         }
 

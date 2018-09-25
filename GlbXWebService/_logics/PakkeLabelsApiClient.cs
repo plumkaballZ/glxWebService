@@ -1,4 +1,5 @@
-﻿using Flurl.Http;
+﻿using Flurl;
+using Flurl.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

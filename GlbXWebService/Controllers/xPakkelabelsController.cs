@@ -1,5 +1,4 @@
-﻿using Flurl.Http;
-using GlbXWebService._logics;
+﻿using GlbXWebService._logics;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;

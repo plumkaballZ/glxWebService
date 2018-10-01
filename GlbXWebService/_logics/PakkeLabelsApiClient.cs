@@ -1,5 +1,4 @@
-﻿using Flurl;
-using Flurl.Http;
+﻿using Flurl.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,15 +17,14 @@ namespace GlbXWebService._logics
 
         public string Token { get { return token; } }
         public string ExpiresAt { get { return expires_at; } }
-
     }
+
     public class PakkelabelsApiClient
     {
         private PakkelabelsToken _token;
 
         private string _urlV1 = "https://app.pakkelabels.dk/api/public/v1/";
         private string _urlV2 = "https://app.pakkelabels.dk/api/public/v2/";
-
 
         public async Task<string> GetLogin()
         {
@@ -48,7 +46,7 @@ namespace GlbXWebService._logics
                     number = "114"
                 });
         }
-        public async Task<string> GetFreightRatesByCountry()
+        public async Task<string> GetFreightRatesByCountry(string country)
         {
             var responseString = await "https://app.pakkelabels.dk/api/public/v2/users/login"
                 .PostUrlEncodedAsync(new { api_user = "0930aeb1-1412-4260-9f19-63fb1d010720", api_key = "1031bb73-6770-46eb-9960-6b1ab31d322e" })
@@ -56,7 +54,7 @@ namespace GlbXWebService._logics
 
             _token = JsonConvert.DeserializeObject<PakkelabelsToken>(responseString);
 
-            return await GetRequest("https://app.pakkelabels.dk/api/public/v2/shipments/freight_rates", new { token = _token.token, country = "DK" });
+            return await GetRequest("https://app.pakkelabels.dk/api/public/v2/shipments/freight_rates", new { token = _token.token, country = country });
         }
         public async Task<string> GetBalance()
         {

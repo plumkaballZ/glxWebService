@@ -41,7 +41,7 @@ namespace GlbXWebService.Controllers
         {
             var str = "empty";
 
-            str = await _apiClinet.GetFreightRatesByCountry();
+            str = await _apiClinet.GetFreightRatesByCountry(country);
 
             return str;
         }

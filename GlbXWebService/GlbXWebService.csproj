@@ -5,12 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="_service\**" />
+    <Content Remove="_service\**" />
+    <EmbeddedResource Remove="_service\**" />
+    <None Remove="_service\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Properties\PublishProfiles\FolderProfile1.pubxml" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="_service\" />
   </ItemGroup>
 
   <ItemGroup>

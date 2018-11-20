@@ -1,4 +1,5 @@
 ﻿using System;
+using GlbXWebService._models;
 using GlbXWebService._repo;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -57,8 +58,8 @@ namespace GlbXWebService.Controllers
         public GlxUser glxUser { get; set; }
         public xOrder Order { get; set; }
         public xUser xUser { get; set; }
-        public xAddressAttr bill_address_attributes { get; set; }
-        public xAddressAttr ship_address_attributes { get; set; }
+        public xAddressAttributes bill_address_attributes { get; set; }
+        public xAddressAttributes ship_address_attributes { get; set; }
         public string jsonStr { get; set; }
     }
 

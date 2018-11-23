@@ -1,4 +1,5 @@
-﻿using GlbXWebService._repo;
+﻿using GlbXWebService._models;
+using GlbXWebService._repo;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;

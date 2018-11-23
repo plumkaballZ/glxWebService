@@ -23,6 +23,7 @@ namespace GlbXWebService._models
         public string stateId;
         public string state_name;
         public string state_text;
+        public string email;
 
         public xAddress()
         {

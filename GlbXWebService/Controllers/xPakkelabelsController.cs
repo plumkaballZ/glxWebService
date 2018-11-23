@@ -1,4 +1,5 @@
 ﻿using GlbXWebService._logics;
+using GlbXWebService._models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -38,9 +39,7 @@ namespace GlbXWebService.Controllers
         public async Task<string> GetFreightRates(string token, string country)
         {
             var str = "empty";
-            var testStr = _apiClinet.CreateTestShipment();
             str = await _apiClinet.GetFreightRatesByCountry(country);
-
             return str;
         }
 

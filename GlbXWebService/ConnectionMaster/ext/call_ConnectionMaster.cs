@@ -10,22 +10,22 @@ using System.Threading.Tasks;
 
 namespace GlbXWebService.ConnMaster.ext
 {
-    public static class call_ConnMaster
+    public static class call_ConnectionMaster
     {
-        public static void ExecuteSP(this IConnMaster<MySqlConnection> connMaster, ConnParamz param)
+        public static void ExecuteSP(this IConnectionMaster<MySqlConnection> connMaster, ConnectionMasterParameters param)
         {
             using (var conn = connMaster.GetOpenConn())
                 conn.Execute(param.SpName, DpsFromParaDic(param.ParamDic), commandType: CommandType.StoredProcedure);
 
         }
-        public static void ExecuteSP(this IConnMaster<DbConnection> connMaster, ConnParamz param)
+        public static void ExecuteSP(this IConnectionMaster<DbConnection> connMaster, ConnectionMasterParameters param)
         {
             using (var conn = connMaster.GetOpenConn())
                 conn.Execute(param.SpName, DpsFromParaDic(param.ParamDic), commandType: CommandType.StoredProcedure);
 
         }
 
-        public static T GetSingle<T>(this IConnMaster<MySqlConnection> connMaster, ConnParamz param)
+        public static T GetSingle<T>(this IConnectionMaster<MySqlConnection> connMaster, ConnectionMasterParameters param)
         {
             T item;
 
@@ -35,7 +35,7 @@ namespace GlbXWebService.ConnMaster.ext
                 return item;
             }
         }
-        public static T GetSingle<T>(this IConnMaster<DbConnection> connMaster, ConnParamz param)
+        public static T GetSingle<T>(this IConnectionMaster<DbConnection> connMaster, ConnectionMasterParameters param)
         {
             T item;
 
@@ -46,7 +46,7 @@ namespace GlbXWebService.ConnMaster.ext
             }
         }
 
-        public static IEnumerable<T> GetList<T>(this IConnMaster<MySqlConnection> connMaster, ConnParamz param)
+        public static IEnumerable<T> GetList<T>(this IConnectionMaster<MySqlConnection> connMaster, ConnectionMasterParameters param)
         {
             IEnumerable<T> items;
 
@@ -56,7 +56,7 @@ namespace GlbXWebService.ConnMaster.ext
                 return items;
             }
         }
-        public static IEnumerable<T> GetList<T>(this IConnMaster<DbConnection> connMaster, ConnParamz param)
+        public static IEnumerable<T> GetList<T>(this IConnectionMaster<DbConnection> connMaster, ConnectionMasterParameters param)
         {
             IEnumerable<T> items;
 

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GlbXWebService.ConnMaster
 {
-    public class ConnMaster_MySql : init_ConnMaster, IConnMaster<MySqlConnection>
+    public class ConnectionMaster_MySql : init_ConnectionMaster, IConnectionMaster<MySqlConnection>
     {
-        public ConnMaster_MySql(string server, string db, string user, string pw, uint timeout = 60, uint port = 3306, bool allowZeroDateTime = true)
+        public ConnectionMaster_MySql(string server, string db, string user, string pw, uint timeout = 60, uint port = 3306, bool allowZeroDateTime = true)
           : base(server, db, user, pw, timeout, port, allowZeroDateTime)
         {
             MySqlConnectionStringBuilder _conStrBuilder = new MySqlConnectionStringBuilder

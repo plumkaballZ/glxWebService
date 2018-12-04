@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GlbXWebService.ConnMaster.help
 {
-    public class ConnParamz
+    public class ConnectionMasterParameters
     {
         private string _spName;
         public string SpName { get { return _spName; } }
@@ -13,7 +13,7 @@ namespace GlbXWebService.ConnMaster.help
         private Dictionary<string, object> _paramDic;
         public Dictionary<string, object> ParamDic { get { return _paramDic; } }
 
-        public ConnParamz(string spName, Dictionary<string, object> paramDic)
+        public ConnectionMasterParameters(string spName, Dictionary<string, object> paramDic)
         {
             _spName = spName;
             _paramDic = paramDic;

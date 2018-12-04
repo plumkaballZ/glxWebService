@@ -40,5 +40,13 @@ namespace GlbXWebService.Controllers
             return Json(req.Order);
         }
 
+        [EnableCors("AllowAllOrigins")]
+        [Route("Delete")]
+        public JsonResult Delete([FromBody]GlxUserRequest req)
+        {
+            var res = _service.Delete(req.ship_address_attributes.uid);
+            return Json(req.Order);
+        }
+
     }
 }

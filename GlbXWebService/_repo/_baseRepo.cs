@@ -9,14 +9,14 @@ namespace GlbXWebService._repo
 {
     public class _baseRepo
     {
-        private IConnMaster<MySqlConnection> _conn;
-        public IConnMaster<MySqlConnection> Conn
+        private IConnectionMaster<MySqlConnection> _conn;
+        public IConnectionMaster<MySqlConnection> Conn
         {
             get { return _conn; }
         }
         public _baseRepo()
         {
-            _conn = new ConnMaster_MySql("62.75.168.220", "Globase", "superErbz", "Jqi5fqfb");
+            _conn = new ConnectionMaster_MySql("62.75.168.220", "Globase", "superErbz", "Jqi5fqfb");
         }
     }
 }

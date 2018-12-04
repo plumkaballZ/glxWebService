@@ -34,6 +34,10 @@ namespace GlbXWebService._services
         {
            return string.IsNullOrEmpty(req.glxUser.email) ? req.Order.email : req.glxUser.email;
         }
+        public bool Delete(string uid)
+        {
+            return _repo.Delete(uid);
+        }
         public bool CanCreateNewAddress(string uid)
         {
             if (string.IsNullOrEmpty(uid))

@@ -31,7 +31,7 @@ namespace GlbXWebService._repo
             paramDic.Add("@countryId", addAttr.country_id);
             paramDic.Add("@stateId", addAttr.state_id);
 
-            Conn.ExecuteSP(new ConnParamz("xAddress_Create_v1", paramDic));
+            Conn.ExecuteSP(new ConnectionMasterParameters("xAddress_Create_v1", paramDic));
 
             var adr = new xAddress(addAttr);
             adr.uid = adrUid.ToString();
@@ -52,24 +52,30 @@ namespace GlbXWebService._repo
             paramDic.Add("@email", addAttr.email);
             paramDic.Add("@uid", addAttr.uid);
 
-            Conn.ExecuteSP(new ConnParamz("xAddress_Update", paramDic));
+            Conn.ExecuteSP(new ConnectionMasterParameters("xAddress_Update", paramDic));
 
             var adr = new xAddress(addAttr);
 
             return adr;
         }
-
         public xAddress Get(string uid)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
             paramDic.Add("@uid", uid);
-            return Conn.GetSingle<xAddress>(new ConnParamz("xAddress_Get_v1", paramDic));
+            return Conn.GetSingle<xAddress>(new ConnectionMasterParameters("xAddress_Get_v1", paramDic));
         }
         public List<xAddress> GetAll(string email)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
             paramDic.Add("@email", email);
-            return Conn.GetList<xAddress>(new ConnParamz("xAddress_GetAll_v1", paramDic)).ToList();
+            return Conn.GetList<xAddress>(new ConnectionMasterParameters("xAddress_GetAll_v1", paramDic)).ToList();
+        }
+        public bool Delete(string uid)
+        {
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@uid", uid);
+            Conn.ExecuteSP(new ConnectionMasterParameters("xAddress_Delete", paramDic));
+            return true;
         }
     }
 

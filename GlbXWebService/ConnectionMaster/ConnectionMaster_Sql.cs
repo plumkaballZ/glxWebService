@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace GlbXWebService.ConnMaster
 {
-    public class ConnMaster_Sql : init_ConnMaster, IConnMaster<DbConnection>
+    public class ConnectionMaster_Sql : init_ConnectionMaster, IConnectionMaster<DbConnection>
     {
-        public ConnMaster_Sql(string dataSoruce, string db, string user, string pw, string initialCatalog, int timeout = 1440) : base(dataSoruce, db, user, pw, initialCatalog, timeout)
+        public ConnectionMaster_Sql(string dataSoruce, string db, string user, string pw, string initialCatalog, int timeout = 1440) : base(dataSoruce, db, user, pw, initialCatalog, timeout)
         {
             var DbConnectionStringBuilder = new DbConnectionStringBuilder();
 

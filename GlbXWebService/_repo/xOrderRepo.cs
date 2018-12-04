@@ -20,21 +20,21 @@ namespace GlbXWebService._repo
             paramDic.Add("@email", email);
 
 
-            return Conn.GetSingle<int>(new ConnParamz("xOrder_Check", paramDic)) == 1 ? true : false;
+            return Conn.GetSingle<int>(new ConnectionMasterParameters("xOrder_Check", paramDic)) == 1 ? true : false;
         }
         public bool CheckNoUser(string ip)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
             paramDic.Add("@ip", ip);
 
-            return Conn.GetSingle<int>(new ConnParamz("xOrder_CheckNoUser", paramDic)) == 1 ? true : false;
+            return Conn.GetSingle<int>(new ConnectionMasterParameters("xOrder_CheckNoUser", paramDic)) == 1 ? true : false;
         }
         public bool Check_ip(string ip)
         {
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
             paramDic.Add("@ip", ip);
 
-            return Conn.GetSingle<int>(new ConnParamz("xOrder_Check_Ip", paramDic)) == 1 ? true : false;
+            return Conn.GetSingle<int>(new ConnectionMasterParameters("xOrder_Check_Ip", paramDic)) == 1 ? true : false;
         }
 
         public bool updateOrder_ip(string userUid, string ip)
@@ -45,7 +45,7 @@ namespace GlbXWebService._repo
             paramDic.Add("@userUid", userUid);
             paramDic.Add("@ip", ip);
 
-            Conn.ExecuteSP(new ConnParamz("xOrder_Update_Ip", paramDic));
+            Conn.ExecuteSP(new ConnectionMasterParameters("xOrder_Update_Ip", paramDic));
 
             return true;
         }
@@ -59,7 +59,7 @@ namespace GlbXWebService._repo
             paramDic.Add("@orderUid", orderUid.ToString());
             paramDic.Add("@ip", ip);
 
-            Conn.ExecuteSP(new ConnParamz("xOrder_Create", paramDic));
+            Conn.ExecuteSP(new ConnectionMasterParameters("xOrder_Create", paramDic));
 
             return orderUid;
         }
@@ -79,7 +79,7 @@ namespace GlbXWebService._repo
             paramDic.Add("@size", line.size);
             paramDic.Add("@color", line.color);
 
-            Conn.ExecuteSP(new ConnParamz("xOrderLine_Create", paramDic));
+            Conn.ExecuteSP(new ConnectionMasterParameters("xOrderLine_Create", paramDic));
 
             return orderLineUid;
         }
@@ -93,7 +93,7 @@ namespace GlbXWebService._repo
             paramDic.Add("@orderId", orderId);
             paramDic.Add("@prodUid", line.id);
 
-            Conn.ExecuteSP(new ConnParamz("xOrderLine_Delete", paramDic));
+            Conn.ExecuteSP(new ConnectionMasterParameters("xOrderLine_Delete", paramDic));
 
             return true;
         }
@@ -105,7 +105,7 @@ namespace GlbXWebService._repo
             paramDic.Add("@addressUid", addressUid);
             paramDic.Add("@shipTotal", shipTotal);
 
-            Conn.ExecuteSP(new ConnParamz("xOrder_SetPaymentDone", paramDic));
+            Conn.ExecuteSP(new ConnectionMasterParameters("xOrder_SetPaymentDone", paramDic));
 
             return true;
         }
@@ -116,7 +116,7 @@ namespace GlbXWebService._repo
             paramDic.Add("@orderId", orderId);
             paramDic.Add("@addressUid", addressUid);
 
-            Conn.ExecuteSP(new ConnParamz("xOrder_SetShipmentSent", paramDic));
+            Conn.ExecuteSP(new ConnectionMasterParameters("xOrder_SetShipmentSent", paramDic));
 
             return true;
         }
@@ -132,7 +132,7 @@ namespace GlbXWebService._repo
 
 
 
-            Conn.ExecuteSP(new ConnParamz("xOrder_CreateNoUser", paramDic));
+            Conn.ExecuteSP(new ConnectionMasterParameters("xOrder_CreateNoUser", paramDic));
 
             return orderUid;
         }
@@ -141,14 +141,14 @@ namespace GlbXWebService._repo
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
             paramDic.Add("@ip", ip);
 
-            var currOrder = Conn.GetSingle<xOrder>(new ConnParamz("xOrder_GetCurrentNoUser", paramDic));
+            var currOrder = Conn.GetSingle<xOrder>(new ConnectionMasterParameters("xOrder_GetCurrentNoUser", paramDic));
 
             if (currOrder.id != null)
             {
                 Dictionary<string, object> paramDic2 = new Dictionary<string, object>();
                 paramDic2.Add("@email", currOrder.email);
                 paramDic2.Add("@orderId", currOrder.id);
-                currOrder.line_items = Conn.GetList<xOrderLine>((new ConnParamz("xOrder_GetLine", paramDic2))).ToList();
+                currOrder.line_items = Conn.GetList<xOrderLine>((new ConnectionMasterParameters("xOrder_GetLine", paramDic2))).ToList();
             }
 
             
@@ -161,14 +161,14 @@ namespace GlbXWebService._repo
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
             paramDic.Add("@email", email);
 
-            var currOrder = Conn.GetSingle<xOrder>(new ConnParamz("xOrder_GetCurrent", paramDic));
+            var currOrder = Conn.GetSingle<xOrder>(new ConnectionMasterParameters("xOrder_GetCurrent", paramDic));
 
             if (currOrder.id != null)
             {
                 Dictionary<string, object> paramDic2 = new Dictionary<string, object>();
                 paramDic2.Add("@email", email);
                 paramDic2.Add("@orderId", currOrder.id);
-                currOrder.line_items = Conn.GetList<xOrderLine>((new ConnParamz("xOrder_GetLine", paramDic2))).ToList();
+                currOrder.line_items = Conn.GetList<xOrderLine>((new ConnectionMasterParameters("xOrder_GetLine", paramDic2))).ToList();
             }
 
          
@@ -182,18 +182,18 @@ namespace GlbXWebService._repo
             paramDic.Add("@email", email);
             paramDic.Add("@ip", ip);
 
-            return Conn.GetList<xOrder>((new ConnParamz("xOrder_GetAll", paramDic))).ToList();
+            return Conn.GetList<xOrder>((new ConnectionMasterParameters("xOrder_GetAll", paramDic))).ToList();
         }
         public List<xOrder> GetAll_lvl99()
         {
-            List<xOrder> orderz = Conn.GetList<xOrder>((new ConnParamz("xOrder_GetAll_lvl99", new Dictionary<string, object>()))).ToList();
+            List<xOrder> orderz = Conn.GetList<xOrder>((new ConnectionMasterParameters("xOrder_GetAll_lvl99", new Dictionary<string, object>()))).ToList();
 
             foreach (xOrder order in orderz)
             {
                 Dictionary<string, object> paramDic = new Dictionary<string, object>();
                 paramDic.Add("@email", order.email);
                 paramDic.Add("@orderId", order.id);
-                order.line_items = Conn.GetList<xOrderLine>((new ConnParamz("xOrder_GetLine", paramDic))).ToList();
+                order.line_items = Conn.GetList<xOrderLine>((new ConnectionMasterParameters("xOrder_GetLine", paramDic))).ToList();
             }
 
             return orderz;
@@ -205,10 +205,10 @@ namespace GlbXWebService._repo
             paramDic.Add("@email", email);
             paramDic.Add("@orderId", orderId);
 
-            xOrder order = Conn.GetSingle<xOrder>((new ConnParamz("xOrder_Get", paramDic)));
+            xOrder order = Conn.GetSingle<xOrder>((new ConnectionMasterParameters("xOrder_Get", paramDic)));
 
             if (order != null)
-                order.line_items = Conn.GetList<xOrderLine>((new ConnParamz("xOrder_GetLine", paramDic))).ToList();
+                order.line_items = Conn.GetList<xOrderLine>((new ConnectionMasterParameters("xOrder_GetLine", paramDic))).ToList();
 
             return order;
         }
